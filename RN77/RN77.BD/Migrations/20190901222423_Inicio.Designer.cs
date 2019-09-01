@@ -10,8 +10,8 @@ using RN77.BD.Datos;
 namespace RN77.BD.Migrations
 {
     [DbContext(typeof(RN77Context))]
-    [Migration("20190716131921_EntityBaseFinal")]
-    partial class EntityBaseFinal
+    [Migration("20190901222423_Inicio")]
+    partial class Inicio
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -141,6 +141,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -186,6 +188,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("date");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -233,6 +237,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -273,6 +279,8 @@ namespace RN77.BD.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("date");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -310,6 +318,8 @@ namespace RN77.BD.Migrations
                     b.Property<int>("AulaGrupoId");
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -353,6 +363,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -374,6 +386,10 @@ namespace RN77.BD.Migrations
 
                     b.HasIndex("CharlaId");
 
+                    b.HasIndex("CodigoGrupo")
+                        .IsUnique()
+                        .HasName("IQ_AulaGrupos");
+
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("AulaGrupos");
@@ -393,6 +409,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("date");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -441,6 +459,8 @@ namespace RN77.BD.Migrations
                     b.Property<DateTime>("Fecha")
                         .HasColumnType("date");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -483,13 +503,13 @@ namespace RN77.BD.Migrations
 
                     b.Property<int>("AnoLectivo");
 
-                    b.Property<int>("AsistenciaValidaId");
+                    b.Property<int?>("AsistenciaValidaId");
 
                     b.Property<int?>("CarreraId");
 
                     b.Property<int?>("CarreraMateriaId");
 
-                    b.Property<int>("CharlaId");
+                    b.Property<int?>("CharlaId");
 
                     b.Property<string>("CodigoAula")
                         .IsRequired()
@@ -500,16 +520,18 @@ namespace RN77.BD.Migrations
                         .IsRequired()
                         .IsUnicode(false);
 
-                    b.Property<DateTime>("Desde")
+                    b.Property<DateTime?>("Desde")
                         .HasColumnType("date");
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
 
-                    b.Property<DateTime>("Hasta")
+                    b.Property<DateTime?>("Hasta")
                         .HasColumnType("date");
 
                     b.Property<string>("Nombre")
@@ -517,7 +539,7 @@ namespace RN77.BD.Migrations
                         .HasMaxLength(200)
                         .IsUnicode(false);
 
-                    b.Property<int>("NotasValidaId");
+                    b.Property<int?>("NotasValidaId");
 
                     b.Property<string>("ObservReg")
                         .IsRequired();
@@ -537,6 +559,10 @@ namespace RN77.BD.Migrations
                     b.HasIndex("CarreraMateriaId");
 
                     b.HasIndex("CharlaId");
+
+                    b.HasIndex("CodigoAula")
+                        .IsUnique()
+                        .HasName("IQ_Aulas");
 
                     b.HasIndex("UsuarioId");
 
@@ -564,6 +590,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -584,6 +612,10 @@ namespace RN77.BD.Migrations
                     b.HasIndex("CarreraId");
 
                     b.HasIndex("CarreraMateriaId");
+
+                    b.HasIndex("CodigoMateria")
+                        .IsUnique()
+                        .HasName("IQ_CarreraMaterias");
 
                     b.HasIndex("UsuarioId");
 
@@ -607,6 +639,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -625,6 +659,10 @@ namespace RN77.BD.Migrations
                         .IsRequired();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CodigoCarrera")
+                        .IsUnique()
+                        .HasName("IQ_Carreras");
 
                     b.HasIndex("InstitucionId");
 
@@ -646,6 +684,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -683,6 +723,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -725,6 +767,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaDigo")
@@ -762,6 +806,8 @@ namespace RN77.BD.Migrations
                     b.Property<int>("CharlaPersonaId");
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -803,6 +849,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -842,6 +890,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaFin")
@@ -873,11 +923,48 @@ namespace RN77.BD.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CodigoCharla")
+                        .IsUnique()
+                        .HasName("IQ_Charlas");
+
                     b.HasIndex("TcharlaId");
 
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Charlas");
+                });
+
+            modelBuilder.Entity("RN77.BD.Datos.Entities.Ciudades", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
+
+                    b.Property<DateTime>("FechaCreaReg");
+
+                    b.Property<DateTime>("FechaModifReg");
+
+                    b.Property<string>("NombreCiudad");
+
+                    b.Property<string>("ObservReg")
+                        .IsRequired();
+
+                    b.Property<int>("ProvinciaId");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProvinciaId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Ciudades");
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Documentos", b =>
@@ -892,6 +979,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -931,6 +1020,9 @@ namespace RN77.BD.Migrations
                         .HasMaxLength(200)
                         .IsUnicode(false);
 
+                    b.Property<int>("CiudadId")
+                        .HasColumnName("CiudadId");
+
                     b.Property<string>("Cp")
                         .IsRequired()
                         .HasColumnName("CP")
@@ -943,6 +1035,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -973,6 +1067,8 @@ namespace RN77.BD.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CiudadId");
+
                     b.HasIndex("TdomicilioId");
 
                     b.HasIndex("UsuarioId");
@@ -989,6 +1085,8 @@ namespace RN77.BD.Migrations
                     b.Property<int>("DocumentoId");
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1023,6 +1121,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -1053,6 +1153,8 @@ namespace RN77.BD.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1086,6 +1188,8 @@ namespace RN77.BD.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1129,6 +1233,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -1149,6 +1255,10 @@ namespace RN77.BD.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CodigoInstitucion")
+                        .IsUnique()
+                        .HasName("IQ_Instituciones");
+
                     b.HasIndex("TnotaId");
 
                     b.HasIndex("UsuarioId");
@@ -1163,6 +1273,8 @@ namespace RN77.BD.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1203,6 +1315,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -1225,6 +1339,36 @@ namespace RN77.BD.Migrations
                     b.ToTable("Materias");
                 });
 
+            modelBuilder.Entity("RN77.BD.Datos.Entities.Paises", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
+
+                    b.Property<DateTime>("FechaCreaReg");
+
+                    b.Property<DateTime>("FechaModifReg");
+
+                    b.Property<string>("NombrePais")
+                        .IsRequired();
+
+                    b.Property<string>("ObservReg")
+                        .IsRequired();
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Paises");
+                });
+
             modelBuilder.Entity("RN77.BD.Datos.Entities.PersonaDocumentos", b =>
                 {
                     b.Property<int>("Id")
@@ -1234,6 +1378,8 @@ namespace RN77.BD.Migrations
                     b.Property<int>("DocumentoId");
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1268,6 +1414,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -1298,6 +1446,8 @@ namespace RN77.BD.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1331,6 +1481,8 @@ namespace RN77.BD.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1370,6 +1522,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -1392,6 +1546,39 @@ namespace RN77.BD.Migrations
                     b.ToTable("Personas");
                 });
 
+            modelBuilder.Entity("RN77.BD.Datos.Entities.Provincias", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
+
+                    b.Property<DateTime>("FechaCreaReg");
+
+                    b.Property<DateTime>("FechaModifReg");
+
+                    b.Property<string>("NombreProvincia");
+
+                    b.Property<string>("ObservReg")
+                        .IsRequired();
+
+                    b.Property<int>("PaisId");
+
+                    b.Property<string>("UsuarioId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaisId");
+
+                    b.HasIndex("UsuarioId");
+
+                    b.ToTable("Provincias");
+                });
+
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tcharlas", b =>
                 {
                     b.Property<int>("Id")
@@ -1408,6 +1595,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1426,9 +1615,13 @@ namespace RN77.BD.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Codigo")
+                        .IsUnique()
+                        .HasName("IQ_Tcharlas");
+
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("TCharlas");
+                    b.ToTable("Tcharlas");
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tdocumentos", b =>
@@ -1443,6 +1636,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1466,7 +1661,7 @@ namespace RN77.BD.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("TDocumentos");
+                    b.ToTable("Tdocumentos");
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tdomicilios", b =>
@@ -1481,6 +1676,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1505,7 +1702,7 @@ namespace RN77.BD.Migrations
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("TDomicilios");
+                    b.ToTable("Tdomicilios");
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tels", b =>
@@ -1515,6 +1712,8 @@ namespace RN77.BD.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1556,6 +1755,8 @@ namespace RN77.BD.Migrations
 
                     b.Property<byte>("EstadoReg");
 
+                    b.Property<DateTime?>("FechaBajaReg");
+
                     b.Property<DateTime>("FechaCreaReg");
 
                     b.Property<DateTime>("FechaModifReg");
@@ -1575,11 +1776,11 @@ namespace RN77.BD.Migrations
 
                     b.HasIndex("Codigo")
                         .IsUnique()
-                        .HasName("IX_TMails");
+                        .HasName("IQ_TMails");
 
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("TMails");
+                    b.ToTable("Tmails");
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tnotas", b =>
@@ -1594,6 +1795,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1624,9 +1827,13 @@ namespace RN77.BD.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Codigo")
+                        .IsUnique()
+                        .HasName("IQ_Tnotas");
+
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("TNotas");
+                    b.ToTable("Tnotas");
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Ttels", b =>
@@ -1641,6 +1848,8 @@ namespace RN77.BD.Migrations
                         .IsUnicode(false);
 
                     b.Property<byte>("EstadoReg");
+
+                    b.Property<DateTime?>("FechaBajaReg");
 
                     b.Property<DateTime>("FechaCreaReg");
 
@@ -1659,9 +1868,13 @@ namespace RN77.BD.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("Codigo")
+                        .IsUnique()
+                        .HasName("IQ_Ttels");
+
                     b.HasIndex("UsuarioId");
 
-                    b.ToTable("TTels");
+                    b.ToTable("Ttels");
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Usuarios", b =>
@@ -1679,7 +1892,11 @@ namespace RN77.BD.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
+                    b.Property<DateTime>("FechaBaja");
+
                     b.Property<DateTime>("FechaCrea");
+
+                    b.Property<DateTime>("FechaModif");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -1692,6 +1909,8 @@ namespace RN77.BD.Migrations
                         .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
+
+                    b.Property<int?>("PersonaId");
 
                     b.Property<string>("PhoneNumber");
 
@@ -1767,17 +1986,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Aulas", "Aula")
                         .WithMany("AulaAlumnos")
                         .HasForeignKey("AulaId")
-                        .HasConstraintName("FK_AulaAlumnos_Aulas");
+                        .HasConstraintName("FK_AulaAlumnos_Aulas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Personas", "Persona")
                         .WithMany("AulaAlumnos")
                         .HasForeignKey("PersonaId")
-                        .HasConstraintName("FK_AulaAlumnos_Personas");
+                        .HasConstraintName("FK_AulaAlumnos_Personas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.AulaAsistencias", b =>
@@ -1785,7 +2006,8 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.AulaAlumnos", "AulaAlumno")
                         .WithMany("AulaAsistencias")
                         .HasForeignKey("AulaAlumnoId")
-                        .HasConstraintName("FK_AulaAsistencias_AulaAlumnos");
+                        .HasConstraintName("FK_AulaAsistencias_AulaAlumnos")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.AulaTemaClases", "AulaTemaClase")
                         .WithMany("AulaAsistencias")
@@ -1795,7 +2017,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.AulaDocentes", b =>
@@ -1803,17 +2025,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Aulas", "Aula")
                         .WithMany("AulaDocentes")
                         .HasForeignKey("AulaId")
-                        .HasConstraintName("FK_AulaDocentes_Aulas");
+                        .HasConstraintName("FK_AulaDocentes_Aulas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Personas", "Persona")
                         .WithMany("AulaDocentes")
                         .HasForeignKey("PersonaId")
-                        .HasConstraintName("FK_AulaDocentes_Personas");
+                        .HasConstraintName("FK_AulaDocentes_Personas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.AulaEvaluaciones", b =>
@@ -1821,12 +2045,13 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Aulas", "Aula")
                         .WithMany("AulaEvaluaciones")
                         .HasForeignKey("AulaId")
-                        .HasConstraintName("FK_AulaEvaluaciones_Aulas");
+                        .HasConstraintName("FK_AulaEvaluaciones_Aulas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.AulaGrupoAlumnos", b =>
@@ -1834,17 +2059,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.AulaAlumnos", "AulaAlumno")
                         .WithMany("AulaGrupoAlumnos")
                         .HasForeignKey("AulaAlumnoId")
-                        .HasConstraintName("FK_AulaGrupoAlumnos_AulaAlumnos");
+                        .HasConstraintName("FK_AulaGrupoAlumnos_AulaAlumnos")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.AulaGrupos", "AulaGrupo")
                         .WithMany("AulaGrupoAlumnos")
                         .HasForeignKey("AulaGrupoId")
-                        .HasConstraintName("FK_AulaGrupoAlumnos_AulaGrupos");
+                        .HasConstraintName("FK_AulaGrupoAlumnos_AulaGrupos")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.AulaGrupos", b =>
@@ -1852,17 +2079,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Aulas", "Aula")
                         .WithMany("AulaGrupos")
                         .HasForeignKey("AulaId")
-                        .HasConstraintName("FK_AulaGrupos_Aulas");
+                        .HasConstraintName("FK_AulaGrupos_Aulas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Charlas", "Charla")
                         .WithMany("AulaGrupos")
                         .HasForeignKey("CharlaId")
-                        .HasConstraintName("FK_AulaGrupos_Charlas");
+                        .HasConstraintName("FK_AulaGrupos_Charlas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.AulaNotas", b =>
@@ -1870,7 +2099,8 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.AulaAlumnos", "AulaAlumno")
                         .WithMany("AulaNotas")
                         .HasForeignKey("AulaAlumnoId")
-                        .HasConstraintName("FK_AulaNotas_AulaAlumnos");
+                        .HasConstraintName("FK_AulaNotas_AulaAlumnos")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.AulaEvaluaciones", "AulaEvaluacion")
                         .WithMany("AulaNotas")
@@ -1880,7 +2110,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.AulaTemaClases", b =>
@@ -1888,12 +2118,13 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Aulas", "Aula")
                         .WithMany("AulaTemaClases")
                         .HasForeignKey("AulaId")
-                        .HasConstraintName("FK_AulaTemaClases_Aulas");
+                        .HasConstraintName("FK_AulaTemaClases_Aulas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Aulas", b =>
@@ -1911,12 +2142,13 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Charlas", "Charla")
                         .WithMany("Aulas")
                         .HasForeignKey("CharlaId")
-                        .HasConstraintName("FK_Aulas_Charlas");
+                        .HasConstraintName("FK_Aulas_Charlas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.CarreraMaterias", b =>
@@ -1924,17 +2156,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Carreras", "Carrera")
                         .WithMany("CarreraMaterias")
                         .HasForeignKey("CarreraId")
-                        .HasConstraintName("FK_CarreraMaterias_Carreras");
+                        .HasConstraintName("FK_CarreraMaterias_Carreras")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Materias", "CarreraMateria")
                         .WithMany("CarreraMaterias")
                         .HasForeignKey("CarreraMateriaId")
-                        .HasConstraintName("FK_CarreraMaterias_Materias");
+                        .HasConstraintName("FK_CarreraMaterias_Materias")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Carreras", b =>
@@ -1942,12 +2176,13 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Instituciones", "Institucion")
                         .WithMany("Carreras")
                         .HasForeignKey("InstitucionId")
-                        .HasConstraintName("FK_Carreras_Instituciones");
+                        .HasConstraintName("FK_Carreras_Instituciones")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.CharlaDigoArchivos", b =>
@@ -1960,7 +2195,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.CharlaDigoLinks", b =>
@@ -1973,7 +2208,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.CharlaDigos", b =>
@@ -1986,17 +2221,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Charlas", "Charla")
                         .WithMany("CharlaDigos")
                         .HasForeignKey("CharlaId")
-                        .HasConstraintName("FK_CharlaDigos_Charlas");
+                        .HasConstraintName("FK_CharlaDigos_Charlas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.CharlaPersonas", "CharlaPersona")
                         .WithMany("CharlaDigos")
                         .HasForeignKey("CharlaPersonaId")
-                        .HasConstraintName("FK_CharlaDigos_CharlaPersonas");
+                        .HasConstraintName("FK_CharlaDigos_CharlaPersonas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.CharlaLeeDigos", b =>
@@ -2009,12 +2246,13 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.CharlaPersonas", "CharlaPersona")
                         .WithMany("CharlaLeeDigos")
                         .HasForeignKey("CharlaPersonaId")
-                        .HasConstraintName("FK_CharlaLeeDigos_CharlaPersonas");
+                        .HasConstraintName("FK_CharlaLeeDigos_CharlaPersonas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.CharlaPersonas", b =>
@@ -2022,17 +2260,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Charlas", "Charla")
                         .WithMany("CharlaPersonas")
                         .HasForeignKey("CharlaId")
-                        .HasConstraintName("FK_CharlaPersonas_Charlas");
+                        .HasConstraintName("FK_CharlaPersonas_Charlas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Personas", "Persona")
                         .WithMany("CharlaPersonas")
                         .HasForeignKey("PersonaId")
-                        .HasConstraintName("FK_CharlaPersonas_Personas");
+                        .HasConstraintName("FK_CharlaPersonas_Personas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Charlas", b =>
@@ -2040,12 +2280,27 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Tcharlas", "Tcharla")
                         .WithMany("Charlas")
                         .HasForeignKey("TcharlaId")
-                        .HasConstraintName("FK_Charlas_TCharlas");
+                        .HasConstraintName("FK_Charlas_TCharlas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("RN77.BD.Datos.Entities.Ciudades", b =>
+                {
+                    b.HasOne("RN77.BD.Datos.Entities.Provincias", "Provincia")
+                        .WithMany("Ciudades")
+                        .HasForeignKey("ProvinciaId")
+                        .HasConstraintName("FK_Ciudades_Provincias")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Documentos", b =>
@@ -2053,25 +2308,33 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Tdocumentos", "Tdocumento")
                         .WithMany("Documentos")
                         .HasForeignKey("TdocumentoId")
-                        .HasConstraintName("FK_Documentos_TDocumentos");
+                        .HasConstraintName("FK_Documentos_TDocumentos")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Domicilios", b =>
                 {
+                    b.HasOne("RN77.BD.Datos.Entities.Ciudades", "Ciudad")
+                        .WithMany("Domicilios")
+                        .HasForeignKey("CiudadId")
+                        .HasConstraintName("FK_Domicilios_Ciudades")
+                        .OnDelete(DeleteBehavior.Restrict);
+
                     b.HasOne("RN77.BD.Datos.Entities.Tdomicilios", "Tdomicilio")
                         .WithMany("Domicilios")
                         .HasForeignKey("TdomicilioId")
-                        .HasConstraintName("FK_Domicilios_TDomicilios");
+                        .HasConstraintName("FK_Domicilios_TDomicilios")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.InstitucionDocumentos", b =>
@@ -2079,17 +2342,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Documentos", "Documento")
                         .WithMany("InstitucionDocumentos")
                         .HasForeignKey("DocumentoId")
-                        .HasConstraintName("FK_InstitucionDocumentos_Documentos");
+                        .HasConstraintName("FK_InstitucionDocumentos_Documentos")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Instituciones", "Institucion")
                         .WithMany("InstitucionDocumentos")
                         .HasForeignKey("InstitucionId")
-                        .HasConstraintName("FK_InstitucionDocumentos_Instituciones");
+                        .HasConstraintName("FK_InstitucionDocumentos_Instituciones")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.InstitucionDomicilios", b =>
@@ -2097,17 +2362,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Domicilios", "Domicilio")
                         .WithMany("InstitucionDomicilios")
                         .HasForeignKey("DomicilioId")
-                        .HasConstraintName("FK_InstitucionDomicilios_Domicilios");
+                        .HasConstraintName("FK_InstitucionDomicilios_Domicilios")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Instituciones", "Institucion")
                         .WithMany("InstitucionDomicilios")
                         .HasForeignKey("InstitucionId")
-                        .HasConstraintName("FK_InstitucionDomicilios_Instituciones");
+                        .HasConstraintName("FK_InstitucionDomicilios_Instituciones")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.InstitucionMails", b =>
@@ -2115,17 +2382,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Instituciones", "Institucion")
                         .WithMany("InstitucionMails")
                         .HasForeignKey("InstitucionId")
-                        .HasConstraintName("FK_InstitucionMails_Instituciones");
+                        .HasConstraintName("FK_InstitucionMails_Instituciones")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Mails", "Mail")
                         .WithMany("InstitucionMails")
                         .HasForeignKey("MailId")
-                        .HasConstraintName("FK_InstitucionMails_Mails");
+                        .HasConstraintName("FK_InstitucionMails_Mails")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.InstitucionTels", b =>
@@ -2133,17 +2402,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Instituciones", "Institucion")
                         .WithMany("InstitucionTels")
                         .HasForeignKey("InstitucionId")
-                        .HasConstraintName("FK_InstitucionTels_Instituciones");
+                        .HasConstraintName("FK_InstitucionTels_Instituciones")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Tels", "Tel")
                         .WithMany("InstitucionTels")
                         .HasForeignKey("TelId")
-                        .HasConstraintName("FK_InstitucionTels_Tels");
+                        .HasConstraintName("FK_InstitucionTels_Tels")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Instituciones", b =>
@@ -2151,12 +2422,13 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Tnotas", "Tnota")
                         .WithMany("Instituciones")
                         .HasForeignKey("TnotaId")
-                        .HasConstraintName("FK_Instituciones_TNotas");
+                        .HasConstraintName("FK_Instituciones_TNotas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Mails", b =>
@@ -2164,12 +2436,13 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Tmails", "Tmail")
                         .WithMany("Mails")
                         .HasForeignKey("TmailId")
-                        .HasConstraintName("FK_Mails_TMails");
+                        .HasConstraintName("FK_Mails_TMails")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Materias", b =>
@@ -2177,7 +2450,15 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("RN77.BD.Datos.Entities.Paises", b =>
+                {
+                    b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.PersonaDocumentos", b =>
@@ -2185,17 +2466,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Documentos", "Documento")
                         .WithMany("PersonaDocumentos")
                         .HasForeignKey("DocumentoId")
-                        .HasConstraintName("FK_PersonaDocumentos_Documentos");
+                        .HasConstraintName("FK_PersonaDocumentos_Documentos")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Personas", "Persona")
                         .WithMany("PersonaDocumentos")
                         .HasForeignKey("PersonaId")
-                        .HasConstraintName("FK_PersonaDocumentos_Personas");
+                        .HasConstraintName("FK_PersonaDocumentos_Personas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.PersonaDomicilios", b =>
@@ -2203,17 +2486,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Domicilios", "Domicilio")
                         .WithMany("PersonaDomicilios")
                         .HasForeignKey("DomicilioId")
-                        .HasConstraintName("FK_PersonaDomicilios_Domicilios");
+                        .HasConstraintName("FK_PersonaDomicilios_Domicilios")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Personas", "Persona")
                         .WithMany("PersonaDomicilios")
                         .HasForeignKey("PersonaId")
-                        .HasConstraintName("FK_PersonaDomicilios_Personas");
+                        .HasConstraintName("FK_PersonaDomicilios_Personas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.PersonaMails", b =>
@@ -2221,17 +2506,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Mails", "Mail")
                         .WithMany("PersonaMails")
                         .HasForeignKey("MailId")
-                        .HasConstraintName("FK_PersonaMails_Mails");
+                        .HasConstraintName("FK_PersonaMails_Mails")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Personas", "Persona")
                         .WithMany("PersonaMails")
                         .HasForeignKey("PersonaId")
-                        .HasConstraintName("FK_PersonaMails_Personas");
+                        .HasConstraintName("FK_PersonaMails_Personas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.PersonaTels", b =>
@@ -2239,17 +2526,19 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Personas", "Persona")
                         .WithMany("PersonaTels")
                         .HasForeignKey("PersonaId")
-                        .HasConstraintName("FK_PersonaTels_Personas");
+                        .HasConstraintName("FK_PersonaTels_Personas")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Tels", "Tel")
                         .WithMany("PersonaTels")
                         .HasForeignKey("TelId")
-                        .HasConstraintName("FK_PersonaTels_Tels");
+                        .HasConstraintName("FK_PersonaTels_Tels")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Personas", b =>
@@ -2257,7 +2546,21 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("RN77.BD.Datos.Entities.Provincias", b =>
+                {
+                    b.HasOne("RN77.BD.Datos.Entities.Paises", "Pais")
+                        .WithMany("Provincias")
+                        .HasForeignKey("PaisId")
+                        .HasConstraintName("FK_Provincias_Paises")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tcharlas", b =>
@@ -2265,7 +2568,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tdocumentos", b =>
@@ -2273,7 +2576,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tdomicilios", b =>
@@ -2281,7 +2584,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tels", b =>
@@ -2289,12 +2592,13 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Ttels", "Ttel")
                         .WithMany("Tels")
                         .HasForeignKey("TtelId")
-                        .HasConstraintName("FK_Tels_TTels");
+                        .HasConstraintName("FK_Tels_TTels")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tmails", b =>
@@ -2302,7 +2606,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Tnotas", b =>
@@ -2310,7 +2614,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("RN77.BD.Datos.Entities.Ttels", b =>
@@ -2318,7 +2622,7 @@ namespace RN77.BD.Migrations
                     b.HasOne("RN77.BD.Datos.Entities.Usuarios", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

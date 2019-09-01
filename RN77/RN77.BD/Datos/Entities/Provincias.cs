@@ -11,12 +11,10 @@ namespace RN77.BD.Datos.Entities
             Ciudades = new HashSet<Ciudades>();
         }
 
-        public int IdProvincia { get; set; }
-
+        public int PaisId { get; set; }
         public string NombreProvincia { get; set; }
 
+        public virtual Paises Pais { get; set; }
         public virtual ICollection<Ciudades> Ciudades { get; set; }
-        
-        public virtual Paises Paises { get; set; }
     }
 }

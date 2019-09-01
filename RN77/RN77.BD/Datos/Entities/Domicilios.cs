@@ -11,8 +11,8 @@ namespace RN77.BD.Datos.Entities
             PersonaDomicilios = new HashSet<PersonaDomicilios>();
         }
 
-
         public int TdomicilioId { get; set; }
+        public int CiudadId { get; set; }
         public string Calle { get; set; }
         public string Numero { get; set; }
         public string Piso { get; set; }
@@ -23,6 +23,8 @@ namespace RN77.BD.Datos.Entities
         public int Y { get; set; }
 
         public virtual Tdomicilios Tdomicilio { get; set; }
+        public virtual Ciudades Ciudad { get; set; }
+
         public virtual ICollection<InstitucionDomicilios> InstitucionDomicilios { get; set; }
         public virtual ICollection<PersonaDomicilios> PersonaDomicilios { get; set; }
     }

@@ -10,7 +10,6 @@ namespace RN77.BD.Datos.Entities
             Tels = new HashSet<Tels>();
         }
 
-
         public string Codigo { get; set; }
         public string Nombre { get; set; }
 

@@ -6,12 +6,15 @@ namespace RN77.BD.Datos.Entities
 {
    public partial class Ciudades : EntityBase
     {
-
-        public int IdCiudad { get; set; }
-
+        public Ciudades()
+        {
+            Domicilios = new HashSet<Domicilios>();
+        }
+        public int ProvinciaId { get; set; }
         public string NombreCiudad { get; set; }
 
-        public virtual Provincias Provincias { get; set; }
+        public virtual Provincias Provincia { get; set; }
 
-     }
+        public virtual ICollection<Domicilios> Domicilios { get; set; }
+    }
 }

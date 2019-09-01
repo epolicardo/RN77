@@ -43,7 +43,7 @@
             }
         }
 
-        public DateTime FechaBajaReg { get; set; }
+        public DateTime? FechaBajaReg { get; set; }
         [Display(Name = "Fecha Baja Local")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
         public DateTime? FechaBajaLocal
@@ -55,7 +55,7 @@
                     return null;
                 }
 
-                return this.FechaBajaReg.ToLocalTime();
+                return this.FechaBajaReg.GetValueOrDefault();
             }
         }
 

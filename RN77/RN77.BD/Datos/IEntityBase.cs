@@ -10,7 +10,7 @@
         DateTime? FechaCreaLocal { get; }
         DateTime FechaModifReg { get; set; }
         DateTime? FechaModifLocal { get; }
-        DateTime FechaBajaReg { get; set; }
+        DateTime? FechaBajaReg { get; set; }
         DateTime? FechaBajaLocal { get; }
         string ObservReg { get; set; }
         Usuarios Usuario { get; set; }
