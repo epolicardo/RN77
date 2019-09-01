@@ -48,7 +48,7 @@
 
         [Display(Name = "Baja")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime FechaBaja { get; set; }
+        public DateTime? FechaBaja { get; set; }
 
         [Display(Name = "Fecha Creación Local")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
@@ -61,7 +61,7 @@
                     return null;
                 }
 
-                return this.FechaBaja.ToLocalTime();
+                return this.FechaBaja.GetValueOrDefault();
             }
         }
 

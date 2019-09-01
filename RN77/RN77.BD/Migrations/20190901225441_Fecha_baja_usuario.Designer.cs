@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RN77.BD.Datos;
 
 namespace RN77.BD.Migrations
 {
     [DbContext(typeof(RN77Context))]
-    partial class RN77ContextModelSnapshot : ModelSnapshot
+    [Migration("20190901225441_Fecha_baja_usuario")]
+    partial class Fecha_baja_usuario
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
