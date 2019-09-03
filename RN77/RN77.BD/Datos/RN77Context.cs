@@ -1018,7 +1018,7 @@
             }
 
             base.OnModelCreating(modelBuilder);
-
+			OnModelCreatingExtension.Seed(modelBuilder); //uses the extension class to seed the db
         }
         #endregion
     }
