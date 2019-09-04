@@ -10,20 +10,24 @@
 
     public class UsuarioHelper : IUsuarioHelper
     {
+        #region CAMPOS
         private readonly UserManager<Usuarios> usuarioManager;
         private readonly SignInManager<Usuarios> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        #endregion
 
-        public UsuarioHelper(
-            UserManager<Usuarios> userManager,
-            SignInManager<Usuarios> signInManager,
-            RoleManager<IdentityRole> roleManager)
+        #region CONSTRUCTOR
+        public UsuarioHelper(UserManager<Usuarios> userManager,
+                     SignInManager<Usuarios> signInManager,
+                     RoleManager<IdentityRole> roleManager)
         {
             this.usuarioManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
         }
+        #endregion
 
+        #region METODOS
         public async Task<IdentityResult> AddUserAsync(Usuarios usuario, string password)
         {
             return await this.usuarioManager.CreateAsync(usuario, password);
@@ -129,11 +133,7 @@
         {
             await this.usuarioManager.DeleteAsync(usuario);
         }
-
-        Task<Usuarios> IUsuarioHelper.GetUserByEmailAsync(string email)
-        {
-            throw new System.NotImplementedException();
-        }
+        #endregion
     }
 }
 

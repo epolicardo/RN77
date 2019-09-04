@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RN77.Actores.Datos;
 using RN77.BD.Datos;
+using RN77.BD.Helpers;
 
 namespace RN77.Actores
 {
@@ -20,17 +22,29 @@ namespace RN77.Actores
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<RN77Context>(cfg =>
+            try
             {
-                cfg.UseSqlServer(this.Configuration.GetConnectionString("RN77Connection"));
-            });
+                services.AddDbContext<RN77Context>(cfg =>
+                {
+                    cfg.UseSqlServer(this.Configuration.GetConnectionString("RN77Connection"));
+                });
 
-            #region REPOSITORIOS
-            //services.AddScoped<IRepositorioTcharlas, RepositorioTcharlas>();
-            //services.AddScoped<IUsuarioHelper, UsuarioHelper>();
-            #endregion
+                #region INYECCION
+                services.AddTransient<SeedDb>();
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+                //services.AddScoped<IRepositorioTcharlas, RepositorioTcharlas>();
+                services.AddScoped<IUsuarioHelper, UsuarioHelper>();
+                services.AddScoped<IMailHelper, MailHelper>();
+                #endregion
+
+                services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            }
+            catch (System.Exception err)
+            {
+
+                throw err;
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
