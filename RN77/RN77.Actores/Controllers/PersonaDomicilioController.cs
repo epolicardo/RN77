@@ -37,7 +37,7 @@ namespace RN77.Actores.Controllers
 
 		[HttpGet("{id}")]
 
-		public async Task<ActionResult<PersonaDomicilios>> GetPersonaDomicilios(long id)
+		public async Task<ActionResult<PersonaDomicilios>> GetPersonaDomicilios(int id)
 
 		{
 
@@ -87,7 +87,7 @@ namespace RN77.Actores.Controllers
 
 		[HttpPut("{id}")]
 
-		public async Task<IActionResult> PutPersonaDomicilios(long id, PersonaDomicilios item)
+		public async Task<IActionResult> PutPersonaDomicilios(int id, PersonaDomicilios item)
 
 		{
 
@@ -117,7 +117,7 @@ namespace RN77.Actores.Controllers
 
 		[HttpDelete("{id}")]
 
-		public async Task<IActionResult> DeletePersonaDomicilios(long id)
+		public async Task<IActionResult> DeletePersonaDomicilios(int id)
 
 		{
 
