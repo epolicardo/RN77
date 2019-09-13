@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RN77.BD.Controllers;
 using RN77.BD.Datos;
 using RN77.BD.Datos.Entities;
+using RN77.BD.Helpers;
+using RN77.BD.Models.Domicilio;
 
 namespace RN77.Actores.Controllers
 {
@@ -15,22 +19,20 @@ namespace RN77.Actores.Controllers
     public class PaisesController : ControllerBase
     {
         private readonly RN77Context context;
+        //private readonly IUsuarioHelper usuarioHelper;
 
         public PaisesController(RN77Context context)
         {
             this.context = context;
-
-
+            //this.usuarioHelper = usuarioHelper;
         }
 
         // GET: api/Paises
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Paises>>> GetPaises()
         {
-            return await context.Paises.ToListAsync();
+            return await context.Paises.Include(p => p.Usuario).ToListAsync();
         }
-
-
 
         // GET: api/Paises/5
         [HttpGet("{id}")]
@@ -46,30 +48,62 @@ namespace RN77.Actores.Controllers
             return paisesItem;
         }
 
-        // POST: api/Paises
+        // POST:/api/Paises
+        // en body
+        // {
+        //     "nombrePais": "Peru",
+        // }
         [HttpPost]
-        public async Task<ActionResult<Paises>> PostPaises(Paises item)
+        public async Task<IActionResult> PostProduct([FromBody] PaisViewModel paisViewModel)
         {
-            context.Paises.Add(item);
-            await context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetPaises), new { id = item.Id }, item);
-        }
-
-        // PUT: api/Paises/5
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPaises(int id, Paises item)
-        {
-            if (id != item.Id)
+            if (!ModelState.IsValid)
             {
-                return BadRequest();
+                return this.BadRequest(ModelState);
             }
 
-            context.Entry(item).State = EntityState.Modified;
+            var user = await context.Users.FindAsync("1");
+            if (user == null)
+            {
+                return this.BadRequest("Usuario Invalido");
+            }
+
+            var entity = new Paises
+            {
+                NombrePais = paisViewModel.NombrePais,
+                Usuario = user,
+            };
+
+            BaseController.CompletaRegistro(entity, 1, "", user, false);
+
+            await this.context.Set<Paises>().AddAsync(entity);
+            try
+            {
+                await this.context.SaveChangesAsync();
+            }
+            catch (Exception ee)
+            {
+                return this.BadRequest("Registro no grabado, controlar.");
+            }
+
+            return Ok(entity);
+        }
+
+
+        // PUT: api/Paises/5
+        // en body
+        // {
+        //     "nombrePais": "Peru",
+        // }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutPaises(int id, [FromBody] PaisViewModel paisViewModel)
+        {
+
+            var entity = await this.context.Set<Paises>().FindAsync(id);
+            entity.NombrePais = paisViewModel.NombrePais;
+            context.Entry(entity).State = EntityState.Modified;
             await context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok(entity);
         }
 
         // DELETE: api/Paises/5
@@ -86,7 +120,7 @@ namespace RN77.Actores.Controllers
             context.Paises.Remove(paises);
             await context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok();
         }
  
     }

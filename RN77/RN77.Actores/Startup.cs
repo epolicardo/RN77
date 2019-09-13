@@ -30,7 +30,7 @@ namespace RN77.Actores
                 });
 
                 #region INYECCION
-                services.AddTransient<SeedDb>();
+                //services.AddTransient<SeedDb>();
 
                 //services.AddScoped<IRepositorioTcharlas, RepositorioTcharlas>();
                 services.AddScoped<IUsuarioHelper, UsuarioHelper>();
@@ -60,12 +60,12 @@ namespace RN77.Actores
                 app.UseHsts();
             }
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "apiactores/{controller=Home}/{action=Index}/{id?}");
-            });
+            //app.UseMvc(routes =>
+            //{
+            //    routes.MapRoute(
+            //        name: "default",
+            //        template: "apiactores/{controller=Home}/{action=Index}/{id?}");
+            //});
 
             app.UseHttpsRedirection();
             app.UseMvc();
