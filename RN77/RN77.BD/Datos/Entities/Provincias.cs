@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace RN77.BD.Datos.Entities
@@ -14,7 +15,10 @@ namespace RN77.BD.Datos.Entities
             Ciudades = new HashSet<Ciudades>();
         }
 
+        [Required]
         public int PaisId { get; set; }
+
+        [Required]
         public string NombreProvincia { get; set; }
     }
 }

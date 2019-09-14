@@ -13,6 +13,10 @@ namespace RN77.BD.Datos.Entities
         }
 
         [Required]
+        [MaxLength(2)]
+        public string CodigoPais { get; set; }
+
+        [Required]
         public string NombrePais { get; set; }
        
         public virtual ICollection<Provincias> Provincias { get; set; }

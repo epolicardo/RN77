@@ -19,30 +19,28 @@ namespace RN77.Actores.Controllers
     public class PaisesController : ControllerBase
     {
         private readonly RN77Context context;
-        //private readonly IUsuarioHelper usuarioHelper;
 
         public PaisesController(RN77Context context)
         {
             this.context = context;
-            //this.usuarioHelper = usuarioHelper;
         }
 
         // GET: api/Paises
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Paises>>> GetPaises()
         {
-            return await context.Paises.Include(p => p.Usuario).ToListAsync();
+            return await this.context.Paises.Include(p => p.Usuario).ToListAsync();
         }
 
         // GET: api/Paises/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Paises>> GetPaises(int id)
         {
-            var paisesItem = await context.Paises.FindAsync(id);
+            var paisesItem = await this.context.Paises.FindAsync(id);
 
             if (paisesItem == null)
             {
-                return NotFound();
+                return this.BadRequest("No existen Paises.");
             }
 
             return paisesItem;
@@ -51,17 +49,18 @@ namespace RN77.Actores.Controllers
         // POST:/api/Paises
         // en body
         // {
+        //     "codigoPais": "PE",
         //     "nombrePais": "Peru",
         // }
         [HttpPost]
-        public async Task<IActionResult> PostProduct([FromBody] PaisViewModel paisViewModel)
+        public async Task<IActionResult> PostPaises([FromBody] PaisViewModel paisViewModel)
         {
             if (!ModelState.IsValid)
             {
                 return this.BadRequest(ModelState);
             }
 
-            var user = await context.Users.FindAsync("1");
+            var user = await this.context.Users.FindAsync("1");
             if (user == null)
             {
                 return this.BadRequest("Usuario Invalido");
@@ -69,6 +68,7 @@ namespace RN77.Actores.Controllers
 
             var entity = new Paises
             {
+                CodigoPais = paisViewModel.CodigoPais,
                 NombrePais = paisViewModel.NombrePais,
                 Usuario = user,
             };
@@ -88,10 +88,10 @@ namespace RN77.Actores.Controllers
             return Ok(entity);
         }
 
-
         // PUT: api/Paises/5
         // en body
         // {
+        //     "codigoPais": "PE",
         //     "nombrePais": "Peru",
         // }
         [HttpPut("{id}")]
@@ -100,8 +100,8 @@ namespace RN77.Actores.Controllers
 
             var entity = await this.context.Set<Paises>().FindAsync(id);
             entity.NombrePais = paisViewModel.NombrePais;
-            context.Entry(entity).State = EntityState.Modified;
-            await context.SaveChangesAsync();
+            this.context.Entry(entity).State = EntityState.Modified;
+            await this.context.SaveChangesAsync();
 
             return Ok(entity);
         }
@@ -110,15 +110,15 @@ namespace RN77.Actores.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePaises(int id)
         {
-            var paises = await context.Paises.FindAsync(id);
+            var paises = await this.context.Paises.FindAsync(id);
 
             if (paises == null)
             {
-                return NotFound();
+                return this.BadRequest("Pais no existe.");
             }
 
-            context.Paises.Remove(paises);
-            await context.SaveChangesAsync();
+            this.context.Paises.Remove(paises);
+            await this.context.SaveChangesAsync();
 
             return Ok();
         }

@@ -10,7 +10,7 @@
         [Required]
         [Display(Name = "Alta")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime FechaCrea { get; set; }
+        public DateTime FechaCreaReg { get; set; }
 
         [Display(Name = "Fecha Creación Local")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
@@ -18,18 +18,18 @@
         {
             get
             {
-                if (this.FechaCrea == null)
+                if (this.FechaBajaReg == null)
                 {
                     return null;
                 }
-                return this.FechaCrea.ToLocalTime();
+                return this.FechaCreaReg.ToLocalTime();
             }
         }
 
         [Required]
         [Display(Name = "Modificación")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime FechaModif { get; set; }
+        public DateTime FechaModifReg { get; set; }
 
         [Display(Name = "Fecha Creación Local")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
@@ -37,18 +37,18 @@
         {
             get
             {
-                if (this.FechaModif == null)
+                if (this.FechaModifReg == null)
                 {
                     return null;
                 }
 
-                return this.FechaModif.ToLocalTime();
+                return this.FechaModifReg.ToLocalTime();
             }
         }
 
         [Display(Name = "Baja")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
-        public DateTime? FechaBaja { get; set; }
+        public DateTime? FechaBajaReg { get; set; }
 
         [Display(Name = "Fecha Creación Local")]
         [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd hh:mm tt}", ApplyFormatInEditMode = false)]
@@ -56,12 +56,12 @@
         {
             get
             {
-                if (this.FechaBaja == null)
+                if (this.FechaBajaReg == null)
                 {
                     return null;
                 }
 
-                return this.FechaBaja.GetValueOrDefault();
+                return this.FechaBajaReg.GetValueOrDefault();
             }
         }
 

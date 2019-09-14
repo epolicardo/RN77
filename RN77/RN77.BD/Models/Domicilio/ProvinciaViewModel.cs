@@ -2,12 +2,12 @@
 
 namespace RN77.BD.Models.Domicilio
 {
-    public class PaisViewModel
+    public class ProvinciaViewModel
     {
         [Required]
-        public string CodigoPais { get; set; }
+        public int PaisId { get; set; }
 
         [Required]
-        public string NombrePais { get; set; }
+        public string NombreProvincia { get; set; }
     }
 }

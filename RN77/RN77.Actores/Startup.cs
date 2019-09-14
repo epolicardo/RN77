@@ -42,7 +42,6 @@ namespace RN77.Actores
             }
             catch (System.Exception err)
             {
-
                 throw err;
             }
         }

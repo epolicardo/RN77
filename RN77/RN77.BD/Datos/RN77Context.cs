@@ -563,13 +563,17 @@
             #region DOMICILIO
             #region Ciudades
             modelBuilder.Entity<Ciudades>(entity =>
-    {
-        entity.HasOne(d => d.Provincia)
-            .WithMany(p => p.Ciudades)
-            .HasForeignKey(d => d.ProvinciaId)
-            .OnDelete(DeleteBehavior.Restrict)
-            .HasConstraintName("FK_Ciudades_Provincias");
-    });
+            {
+                entity.HasOne(d => d.Provincia)
+                    .WithMany(p => p.Ciudades)
+                    .HasForeignKey(d => d.ProvinciaId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Ciudades_Provincias");
+
+                entity.HasIndex(e => e.NombreCiudad)
+                    .HasName("IQ_NombreCiudad")
+                    .IsUnique();
+            });
             #endregion
 
             #region Domicilios
@@ -650,6 +654,19 @@
                     .HasForeignKey(d => d.PaisId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Provincias_Paises");
+
+                entity.HasIndex(e => e.NombreProvincia)
+                    .HasName("IQ_NombreProvincia")
+                    .IsUnique();
+            });
+            #endregion
+
+            #region Paises
+            modelBuilder.Entity<Paises>(entity =>
+            {
+                entity.HasIndex(e => e.NombrePais)
+                    .HasName("IQ_NombrePais")
+                    .IsUnique();
             });
             #endregion
 

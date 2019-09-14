@@ -60,8 +60,8 @@
             {
                 Email = email,
                 UserName = email,
-                FechaCrea = DateTime.Parse("2019-01-01"),
-                FechaModif = DateTime.Parse("2019-01-01"),
+                FechaCreaReg = DateTime.Parse("2019-01-01"),
+                FechaModifReg = DateTime.Parse("2019-01-01"),
                 PhoneNumber = "3516756998",
             };
 
