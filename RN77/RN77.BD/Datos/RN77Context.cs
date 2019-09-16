@@ -667,6 +667,9 @@
                 entity.HasIndex(e => e.NombrePais)
                     .HasName("IQ_NombrePais")
                     .IsUnique();
+                entity.HasIndex(e => e.CodigoPais)
+                    .HasName("IQ_CodigoPais")
+                    .IsUnique();
             });
             #endregion
 
