@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using RN77.BD.Controllers;
 using RN77.BD.Datos;
 using RN77.BD.Datos.Entities;
+using RN77.BD.Helpers;
+using RN77.BD.Models.Domicilio;
+using RN77.BD.Models.Persona;
 
 namespace RN77.Actores.Controllers
 {
@@ -14,11 +19,11 @@ namespace RN77.Actores.Controllers
 	[ApiController]
 	public class PersonasController : ControllerBase
 	{
-		private readonly RN77Context _context;
+		private readonly RN77Context context;
 
 		public PersonasController(RN77Context context)
 		{
-			_context = context;
+			this.context = context;
 		}
 
 		// GET: api/Personas
@@ -29,7 +34,7 @@ namespace RN77.Actores.Controllers
 
 		{
 
-			return await _context.Personas.ToListAsync();
+			return await this.context.Personas.Include(p => p.Usuario).ToListAsync();
 
 		}
 
@@ -42,7 +47,7 @@ namespace RN77.Actores.Controllers
 
 		{
 
-			var personasItem = await _context.Personas.FindAsync(id);
+			var personasItem = await this.context.Personas.FindAsync(id);
 
 
 
@@ -50,7 +55,7 @@ namespace RN77.Actores.Controllers
 
 			{
 
-				return NotFound();
+				return this.BadRequest("No existen Personas.");
 
 			}
 
@@ -66,18 +71,40 @@ namespace RN77.Actores.Controllers
 
 		[HttpPost]
 
-		public async Task<ActionResult<Personas>> PostPersonas(Personas item)
+		public async Task<IActionResult> PostPersona([FromBody] PersonaViewModel personaViewModel)
 
 		{
+			if (!ModelState.IsValid)
+			{
+				return this.BadRequest(ModelState);
+			}
 
-			_context.Personas.Add(item);
+			var user = await this.context.Users.FindAsync("1");
+			if (user == null)
+			{
+				return this.BadRequest("Usuario Invalido");
+			}
 
-			await _context.SaveChangesAsync();
+			var entity = new Personas
+			{
+				Nombre = personaViewModel.Nombre,
+				Apellido = personaViewModel.Apellido,
+				Usuario = user,
+			};
 
+			BaseController.CompletaRegistro(entity, 1, "", user, false);
 
+			await this.context.Set<Personas>().AddAsync(entity);
+			try
+			{
+				await this.context.SaveChangesAsync();
+			}
+			catch (Exception ee)
+			{
+				return this.BadRequest("Registro no grabado, controlar.");
+			}
 
-			return CreatedAtAction(nameof(GetPersonas), new { id = item.Id }, item);
-
+			return Ok(entity);
 		}
 
 
@@ -88,28 +115,16 @@ namespace RN77.Actores.Controllers
 
 		[HttpPut("{id}")]
 
-		public async Task<IActionResult> PutPersonas(long id, Personas item)
+		public async Task<IActionResult> PutPersonas(int id, [FromBody] PersonaViewModel personaViewModel)
 
 		{
 
-			if (id != item.Id)
+			var entity = await this.context.Set<Personas>().FindAsync(id);
+			entity.Nombre = personaViewModel.Nombre;
+			this.context.Entry(entity).State = EntityState.Modified;
+			await this.context.SaveChangesAsync();
 
-			{
-
-				return BadRequest();
-
-			}
-
-
-
-			_context.Entry(item).State = EntityState.Modified;
-
-			await _context.SaveChangesAsync();
-
-
-
-			return NoContent();
-
+			return Ok(entity);
 		}
 
 
@@ -118,30 +133,20 @@ namespace RN77.Actores.Controllers
 
 		[HttpDelete("{id}")]
 
-		public async Task<IActionResult> DeletePersonas(long id)
+		public async Task<IActionResult> DeletePersonas(int id)
 
 		{
-
-			var personas = await _context.Personas.FindAsync(id);
-
-
+			var personas = await this.context.Personas.FindAsync(id);
 
 			if (personas == null)
-
 			{
-
-				return NotFound();
-
+				return this.BadRequest("Personas no existe.");
 			}
 
-			_context.Personas.Remove(personas);
+			this.context.Personas.Remove(personas);
+			await this.context.SaveChangesAsync();
 
-			await _context.SaveChangesAsync();
-
-
-
-			return NoContent();
-
+			return Ok();
 		}
 
 	}
