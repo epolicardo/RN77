@@ -45,8 +45,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Persona\" />
-  </ItemGroup>
-
 </Project>
