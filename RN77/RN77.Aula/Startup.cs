@@ -46,12 +46,7 @@
                 app.UseHsts();
             }
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "apiaula/{controller=Home}/{action=Index}/{id?}");
-            });
+            
 
             app.UseHttpsRedirection();
             app.UseMvc();
