@@ -924,7 +924,7 @@
             modelBuilder.Entity<Tdocumentos>(entity =>
             {
                 entity.HasIndex(e => e.Codigo)
-                    .HasName("IX_TDocumentos")
+                    .HasName("IQ_TDocCodigo")
                     .IsUnique();
 
                 entity.Property(e => e.Codigo)
@@ -935,6 +935,10 @@
                 entity.Property(e => e.Nombre)
                     .IsRequired()
                     .IsUnicode(false);
+
+                entity.HasIndex(e => e.Nombre)
+                    .HasName("IQ_TDocNombre")
+                    .IsUnique();
             });
             #endregion
 
@@ -1030,7 +1034,6 @@
                             .SelectMany(t => t.GetForeignKeys())
                             .Where(fk => !fk.IsOwnership 
                                          && (fk.DeleteBehavior == DeleteBehavior.Casca­de
-                                         || fk.DeleteBehavior == DeleteBehavior.SetNull
                                          || fk.DeleteBehavior == DeleteBehavior.SetNull));
             foreach (var fk in cascadeFKs)
             {

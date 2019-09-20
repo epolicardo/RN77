@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace RN77.BD.Datos.Entities
 {
@@ -9,7 +9,6 @@ namespace RN77.BD.Datos.Entities
         {
             Documentos = new HashSet<Documentos>();
         }
-
 
         public string Codigo { get; set; }
         public string Nombre { get; set; }
