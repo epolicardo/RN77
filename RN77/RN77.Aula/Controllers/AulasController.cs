@@ -10,6 +10,7 @@ using RN77.BD.Controllers;
 using RN77.BD.Datos;
 using RN77.BD.Datos.Entities;
 using RN77.BD.Helpers;
+using RN77.BD.Models.Aula;
 using RN77.BD.Models.Domicilio;
 
 namespace RN77.Aula.Controllers

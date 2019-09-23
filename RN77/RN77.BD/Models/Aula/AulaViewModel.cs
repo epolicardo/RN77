@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RN77.BD.Models.Domicilio
-{
+namespace RN77.BD.Models.Aula
+{ 
     public class AulaViewModel
     {
         [Required]

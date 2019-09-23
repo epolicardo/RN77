@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using RN77.BD.Datos;
 using RN77.BD.Datos.Entities;
 
-namespace RN77.Actores.Controllers
+namespace RN77.Aula.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
