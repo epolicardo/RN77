@@ -4,7 +4,6 @@ using RN77.BD.Datos.Entities;
 using RN77.BD.Helpers;
 using RN77.BD.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -94,6 +93,5 @@ namespace RN77.Actores.Controllers
                 });
             }
         }
-
     }
 }
