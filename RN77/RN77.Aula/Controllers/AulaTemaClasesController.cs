@@ -48,7 +48,7 @@ namespace RN77.Aula.Controllers
             return aulasItem;
         }
 
-        // POST:/api/Aulas
+        // POST:/api/AulaTemaClases
         // en body
         // {
         //     "CodigoAula" : "XTR233",
@@ -98,7 +98,7 @@ namespace RN77.Aula.Controllers
             return Ok(entity);
         }
 
-        // PUT: api/Aulas/5
+        // PUT: api/AulaTemaClases/5
         // en body
         // {
         //     "CodigoAula" : "XTR233",
