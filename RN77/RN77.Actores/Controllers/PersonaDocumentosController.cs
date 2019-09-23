@@ -71,7 +71,7 @@ namespace RN77.Actores.Controllers
 
 			_context.PersonaDocumentos.Add(item);
 
-			await _context.SaveChangesAsync();
+			await _context.SaveChangesAsync();   
 
 
 
