@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Aulas";
+}
+
+<h1>Aulas</h1>
+
+<div class="text-center">
+    <h1 class="display-4">Administrador de Aulas</h1>
+    <p>Acá va algo despues :v.</p>
+
+    @foreach (var aula in Model)
+    {
+
+        /*  <li><p><b>Codigo de aula:</b> @aula.CodigoAula</p></li>
+
+          <li><p><b>Nombre:</b> @aula.Nombre</p></li>
+
+          <li><p><b>Descripcion:</b> @aula.Descripcion</p></li>
+
+          <li> <p><b>Anio Lectivo:</b> @aula.AnoLectivo</p></li>
+
+          <li><p><b>Periodo: </b>@aula.Periodo</p></li>
+
+          <li><p>//////////////////////////////</p></li> */
+
+        <div class="list-group" id="myList" role="tablist">
+            <a class="list-group-item list-group-item-action" data-toggle="list" href="#home" role="tab"><b>Nombre:</b> @aula.Nombre</a>
+        </div>
+            
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="home" role="tabpanel">
+                    <b>Codigo de aula:</b> @aula.CodigoAula
+
+                    <b>Descripcion:</b> @aula.Descripcion
+
+                    <b>Anio Lectivo:</b> @aula.AnoLectivo
+
+                    <b>Periodo: </b>@aula.Periodo
+                </div>
+
+            </div>
+            
+                
+        <script>
+           $('#myList [href="#home"]').on('click', function (e) {
+  e.preventDefault()
+  $(this).tab('show')
+})
+        </script>
+
+    }
+
+</div>
