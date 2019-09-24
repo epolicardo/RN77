@@ -18,8 +18,8 @@
 
         #region CONSTRUCTOR
         public UsuarioHelper(UserManager<Usuarios> userManager,
-                     SignInManager<Usuarios> signInManager,
-                     RoleManager<IdentityRole> roleManager)
+                             SignInManager<Usuarios> signInManager,
+                             RoleManager<IdentityRole> roleManager)
         {
             this.usuarioManager = userManager;
             this.signInManager = signInManager;

@@ -9,12 +9,18 @@ namespace RN77.BD.Models
     public class RegisterNewUserViewModel
     {
         [Required]
-        [Display(Name = "First Name")]
+        [Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
         [Required]
-        [Display(Name = "Last Name")]
+        [Display(Name = "Apellido")]
         public string Apellido { get; set; }
+
+        [Display(Name = "Nº Documento")]
+        public string Documento { get; set; }
+
+        [Display(Name = "Tipo Doc.")]
+        public int? TdocumentoCod { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -28,5 +34,4 @@ namespace RN77.BD.Models
         [Compare("Password")]
         public string Confirm { get; set; }
     }
-
 }

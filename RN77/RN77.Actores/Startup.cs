@@ -1,12 +1,17 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using RN77.Actores.Datos;
+using Microsoft.IdentityModel.Tokens;
+using RN77.Actores.Controllers;
 using RN77.BD.Datos;
+using RN77.BD.Datos.Entities;
+using RN77.BD.Datos.Repositorios;
 using RN77.BD.Helpers;
+using System.Text;
 
 namespace RN77.Actores
 {
@@ -24,6 +29,34 @@ namespace RN77.Actores
         {
             try
             {
+                services.AddIdentity<Usuarios, IdentityRole>(cfg =>
+                {
+                    cfg.Tokens.AuthenticatorTokenProvider = TokenOptions.DefaultAuthenticatorProvider;
+                    cfg.SignIn.RequireConfirmedEmail = true;
+                    cfg.User.RequireUniqueEmail = true;
+                    cfg.Password.RequireDigit = false;
+                    cfg.Password.RequiredUniqueChars = 0;
+                    cfg.Password.RequireLowercase = false;
+                    cfg.Password.RequireNonAlphanumeric = false;
+                    cfg.Password.RequireUppercase = false;
+                    cfg.Password.RequiredLength = 6;
+                })
+                .AddDefaultTokenProviders()
+                .AddEntityFrameworkStores<RN77Context>();
+
+                services.AddAuthentication()
+                    .AddCookie()
+                    .AddJwtBearer(cfg =>
+                    {
+                        cfg.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidIssuer = this.Configuration["Tokens:Issuer"],
+                            ValidAudience = this.Configuration["Tokens:Audience"],
+                            IssuerSigningKey = new SymmetricSecurityKey(
+                                Encoding.UTF8.GetBytes(this.Configuration["Tokens:Key"]))
+                        };
+                    });
+
                 services.AddDbContext<RN77Context>(cfg =>
                 {
                     cfg.UseSqlServer(this.Configuration.GetConnectionString("RN77Connection"));
@@ -32,7 +65,6 @@ namespace RN77.Actores
                 #region INYECCION
                 //services.AddTransient<SeedDb>();
 
-                //services.AddScoped<IRepositorioTcharlas, RepositorioTcharlas>();
                 services.AddScoped<IUsuarioHelper, UsuarioHelper>();
                 services.AddScoped<IMailHelper, MailHelper>();
                 #endregion
