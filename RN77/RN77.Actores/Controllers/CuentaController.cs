@@ -63,7 +63,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(RegisterNewUserViewModel model)
+        public async Task<IActionResult> Register(RegistrarNuevoUsuarioViewModel model)
         {
             if (this.ModelState.IsValid)
             {
@@ -156,7 +156,7 @@
         }
 
         [HttpPost]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<IActionResult> ChangePassword(CambiarPasswordViewModel model)
         {
             if (this.ModelState.IsValid)
             {

@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace RN77.BD.Models
 {
-    using System.ComponentModel.DataAnnotations;
-
-    public class RegisterNewUserViewModel
+    public class RegistrarNuevoUsuarioViewModel
     {
         [Required]
         [Display(Name = "Nombre")]
@@ -24,10 +20,12 @@ namespace RN77.BD.Models
 
         [Required]
         [DataType(DataType.EmailAddress)]
+        [Display(Name = "Usuario(email)")]
         public string Username { get; set; }
 
         [Required]
         [MinLength(6)]
+        [Display(Name = "Clave")]
         public string Password { get; set; }
 
         [Required]

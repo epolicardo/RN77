@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace RN77.BD.Models
 {
-    public class ChangePasswordViewModel
+    public class CambiarPasswordViewModel
     {
         [Required]
         [Display(Name = "Password Actual")]

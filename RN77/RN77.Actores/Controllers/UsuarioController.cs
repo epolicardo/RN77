@@ -25,7 +25,7 @@ namespace RN77.Actores.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> PostUsuario([FromBody] RegisterNewUserViewModel peticion)
+        public async Task<IActionResult> PostUsuario([FromBody] RegistrarNuevoUsuarioViewModel peticion)
         {
             try
             {
