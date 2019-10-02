@@ -1,0 +1,30 @@
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+using RN77.BD.Datos.Entities;
+using RN77.BD.Models;
+
+namespace RN77.BD.Helpers
+{
+    public interface IUsuarioHelper
+    {
+        Task<IdentityResult> AddUserAsync(Usuarios usuario, string password);
+        Task AddUsuariosToRoleAsync(Usuarios usuario, string roleName);
+        Task<IdentityResult> ChangePasswordAsync(Usuarios usuario, string oldPassword, string newPassword);
+        Task CheckRoleAsync(string roleName);
+        Task<IdentityResult> ConfirmEmailAsync(Usuarios usuario, string token);
+        Task DeleteUserAsync(Usuarios usuario);
+        Task<string> GenerateEmailConfirmationTokenAsync(Usuarios usuario);
+        Task<string> GeneratePasswordResetTokenAsync(Usuarios usuario);
+        Task<List<Usuarios>> GetAllUsersAsync();
+        Task<Usuarios> GetUserByEmailAsync(string email);
+        Task<Usuarios> GetUserByIdAsync(string usuarioId);
+        Task<bool> IsUserInRoleAsync(Usuarios usuario, string roleName);
+        Task<SignInResult> LoginAsync(LoginViewModel model);
+        Task LogoutAsync();
+        Task RemoveUserFromRoleAsync(Usuarios usuario, string roleName);
+        Task<IdentityResult> ResetPasswordAsync(Usuarios usuario, string token, string password);
+        Task<IdentityResult> UpdateUserAsync(Usuarios usuario);
+        Task<SignInResult> ValidatePasswordAsync(Usuarios usuario, string password);
+    }
+}
