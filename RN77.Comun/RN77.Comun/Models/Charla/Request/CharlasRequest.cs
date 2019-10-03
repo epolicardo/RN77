@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace RN77.Comun.Models.Charla
+namespace RN77.Comun.Models.Charla.Request
 {
-    public class CharlasViewModel
+    public class CharlasRequest
     {
         public int TcharlaId { get; set; }
         public int Id { get; set; }

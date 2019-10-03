@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace RN77.Comun.Models.Varios
+namespace RN77.Comun.Models.Usuario.Respuesta
+
 {
     public class TokenRespuesta
     {

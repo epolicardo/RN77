@@ -28,9 +28,9 @@ namespace RN77.Actores
             });
 
             #region INYECCION
-            services.AddScoped<IUsuarioHelper, UsuarioHelper>();
-            services.AddScoped<IMailHelper, MailHelper>();
-            services.AddScoped<IApiService, ApiService>();
+            //services.AddScoped<IUsuarioHelper, UsuarioHelper>();
+            //services.AddScoped<IMailHelper, MailHelper>();
+            //services.AddScoped<IApiService, ApiService>();
             #endregion
 
             services.AddControllers();

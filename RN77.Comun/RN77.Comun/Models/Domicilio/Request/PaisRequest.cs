@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RN77.Comun.Models.Domicilio
+namespace RN77.Comun.Models.Domicilio.Request
 {
-    public class PaisViewModel
+    public class PaisRequest
     {
         [Required]
         public string CodigoPais { get; set; }

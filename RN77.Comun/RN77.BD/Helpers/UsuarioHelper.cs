@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using RN77.BD.Datos.Entities;
-using RN77.Comun.Models.Usuario;
+using RN77.Comun.Models.Usuario.Request;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -65,7 +65,7 @@ namespace RN77.BD.Helpers
             return await this.usuarioManager.IsInRoleAsync(usuario, roleName);
         }
 
-        public async Task<SignInResult> LoginAsync(LoginViewModel model)
+        public async Task<SignInResult> LoginAsync(LoginRequest model)
         {
             return await this.signInManager.PasswordSignInAsync(model.Usuario,
                                                                 model.Password,

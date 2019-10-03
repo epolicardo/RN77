@@ -4,4 +4,22 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Aula\Respuesta\" />
+    <Folder Include="Models\Aula\ViewModel\" />
+    <Folder Include="Models\Carrera\Request\" />
+    <Folder Include="Models\Carrera\Respuesta\" />
+    <Folder Include="Models\Carrera\ViewModel\" />
+    <Folder Include="Models\Charla\Respuesta\" />
+    <Folder Include="Models\Charla\ViewModel\" />
+    <Folder Include="Models\Domicilio\Respuesta\" />
+    <Folder Include="Models\Domicilio\ViewModel\" />
+    <Folder Include="Models\Institutcion\Request\" />
+    <Folder Include="Models\Institutcion\Respuesta\" />
+    <Folder Include="Models\Institutcion\ViewModel\" />
+    <Folder Include="Models\Persona\Respuesta\" />
+    <Folder Include="Models\Persona\ViewModel\" />
+    <Folder Include="Models\Usuario\ViewModel\" />
+  </ItemGroup>
+
 </Project>

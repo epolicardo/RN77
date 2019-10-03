@@ -1,6 +1,6 @@
-﻿namespace RN77.Comun.Models.Charla
+﻿namespace RN77.Comun.Models.Charla.Request
 {
-    public class CharlaPersonasViewModel
+    public class CharlaPersonasRequest
     {
         public int PersonaId { get; set; }
         public int CharlaId { get; set; }

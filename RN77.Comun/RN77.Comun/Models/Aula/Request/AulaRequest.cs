@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RN77.Comun.Models.Aula
+namespace RN77.Comun.Models.Aula.Request
 {
-    public class AulaViewModel
+    public class AulaRequest
     {
         [Required]
         public string CodigoAula { get; set; }

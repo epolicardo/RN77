@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
 
-namespace RN77.Comun.Models.Usuario
+namespace RN77.Comun.Models.Usuario.Request
 {
-    public class ChangeUserViewModel
+    public class ChangeUserRequest
     {
         [Required]
         [Display(Name = "Nombre")]

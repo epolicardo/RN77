@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using RN77.BD.Datos.Entities;
-using RN77.Comun.Models.Usuario;
+using RN77.Comun.Models.Usuario.Request;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -20,7 +20,7 @@ namespace RN77.BD.Helpers
         Task<Usuarios> GetUserByEmailAsync(string email);
         Task<Usuarios> GetUserByIdAsync(string usuarioId);
         Task<bool> IsUserInRoleAsync(Usuarios usuario, string roleName);
-        Task<SignInResult> LoginAsync(LoginViewModel model);
+        Task<SignInResult> LoginAsync(LoginRequest model);
         Task LogoutAsync();
         Task RemoveUserFromRoleAsync(Usuarios usuario, string roleName);
         Task<IdentityResult> ResetPasswordAsync(Usuarios usuario, string token, string password);

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using RN77.BD.Datos;
@@ -37,20 +36,22 @@ namespace MyVet.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "Petición Incorrecta"
+                    Mensaje = "Petición Incorrecta",
+                    Resultado = null
                 });
             }
 
             var usuario = await usuarioHelper.GetUserByEmailAsync(peticion.Username);
             if (usuario != null)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "El Usuario ya existe"
+                    Mensaje = "El Usuario ya existe",
+                    Resultado = null
                 });
             }
 
@@ -79,8 +80,7 @@ namespace MyVet.Web.Controllers.API
             var tokenType = "";
             var accestoken = "";
 
-
-                var personaResp = await apiService.PostAsync<Personas>(urlBase, servicePrefix, PersonaModel, tokenType, accestoken);
+            //var personaResp = await apiService.PostAsync<Personas>(urlBase, servicePrefix, PersonaModel, tokenType, accestoken);
             //context.Owners.Add(new Owner { User = usuarioNuevo });
 
             await context.SaveChangesAsync();
@@ -96,10 +96,11 @@ namespace MyVet.Web.Controllers.API
                 $"Para dar de alta el usuario, " +
                 $"por favor click en este link:</br></br><a href = \"{tokenLink}\">Confirmo eMail</a>");
 
-            return Ok(new Respuesta<object>
+            return Ok(new Respuesta
             {
                 EsExitoso = true,
-                Mensaje = "Un email ha sido enviado para confirmación. Por favor confirme su cuenta y conectese a la aplicación."
+                Mensaje = "Un email ha sido enviado para confirmación. Por favor confirme su cuenta y conectese a la aplicación.",
+                Resultado = null
             });
         }
 
@@ -109,33 +110,36 @@ namespace MyVet.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "Petición incorrecta."
+                    Mensaje = "Petición incorrecta.",
+                    Resultado = null
                 });
             }
 
             var usuario = await usuarioHelper.GetUserByEmailAsync(peticion.Email);
             if (usuario == null)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "El eMail no esta asignado a ningún usuario."
+                    Mensaje = "El eMail no esta asignado a ningún usuario.",
+                    Resultado = null
                 });
             }
 
             var myToken = await usuarioHelper.GeneratePasswordResetTokenAsync(usuario);
             var link = Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
-            mailHelper.SendMail(peticion.Email, "Password Reset", $"<h1>Recover Password</h1>" +
-                $"To reset the password click in this link:</br></br>" +
-                $"<a href = \"{link}\">Reset Password</a>");
+            mailHelper.SendMail(peticion.Email, "Limpiar Password", $"<h1>Recuperar Password</h1>" +
+                $"Para recuperar la password click en este link:</br></br>" +
+                $"<a href = \"{link}\">Recuperar Password</a>");
 
-            return Ok(new Respuesta<object>
+            return Ok(new Respuesta
             {
                 EsExitoso = true,
-                Mensaje = "Un eMail con las instrucciones de cambio de password ha sido enviado."
+                Mensaje = "Un eMail con las instrucciones de cambio de password ha sido enviado.",
+                Resultado = null
             });
         }
 
@@ -145,20 +149,22 @@ namespace MyVet.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "Petición incorrecta"
+                    Mensaje = "Petición incorrecta",
+                    Resultado = null
                 });
             }
 
             var usuarioEntity = await usuarioHelper.GetUserByEmailAsync(peticion.Username);
             if (usuarioEntity == null)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "Usuario no encontrado."
+                    Mensaje = "Usuario no encontrado.",
+                    Resultado = null
                 });
             }
 
@@ -171,11 +177,21 @@ namespace MyVet.Web.Controllers.API
             var respose = await usuarioHelper.UpdateUserAsync(usuarioEntity);
             if (!respose.Succeeded)
             {
-                return BadRequest(respose.Errors.FirstOrDefault().Description);
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = respose.Errors.FirstOrDefault().Description,
+                    Resultado = null
+                });
             }
 
             var updatedUser = await usuarioHelper.GetUserByEmailAsync(peticion.Username);
-            return Ok(updatedUser);
+            return Ok(new Respuesta
+            {
+                EsExitoso = true,
+                Mensaje = "",
+                Resultado = updatedUser
+            });
         }
 
         [HttpPost]
@@ -185,37 +201,41 @@ namespace MyVet.Web.Controllers.API
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "Petición incorrecta"
+                    Mensaje = "Petición incorrecta",
+                    Resultado = null
                 });
             }
 
             var user = await usuarioHelper.GetUserByEmailAsync(peticion.eMail);
             if (user == null)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "Este eMail no está asignado a ningún usuario"
+                    Mensaje = "Este eMail no está asignado a ningún usuario",
+                    Resultado = null
                 });
             }
 
             var result = await usuarioHelper.ChangePasswordAsync(user, peticion.oldPassword, peticion.newPassword);
             if (!result.Succeeded)
             {
-                return BadRequest(new Respuesta<object>
+                return BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = result.Errors.FirstOrDefault().Description
+                    Mensaje = result.Errors.FirstOrDefault().Description,
+                    Resultado = null
                 });
             }
 
-            return Ok(new Respuesta<object>
+            return Ok(new Respuesta
             {
                 EsExitoso = true,
-                Mensaje = "La password ha sido cambiada correctamente."
+                Mensaje = "La password ha sido cambiada correctamente.",
+                Resultado = null
             });
         }
     }

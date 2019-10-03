@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RN77.Comun.Models.Domicilio
+namespace RN77.Comun.Models.Domicilio.Request
 {
-    public class CiudadViewModel
+    public class CiudadRequest
     {
         [Required]
         public int ProvinciaId { get; set; }

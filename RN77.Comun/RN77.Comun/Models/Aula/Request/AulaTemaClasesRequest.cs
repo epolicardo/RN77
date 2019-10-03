@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace RN77.Comun.Models.Aula
+namespace RN77.Comun.Models.Aula.Request
 {
-    public class AulaTemaClasesViewModel
+    public class AulaTemaClasesRequest
     {
         [Required]
         public int AulaId { get; set; }

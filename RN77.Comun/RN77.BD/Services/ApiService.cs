@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace RN77.BD.Services
 {
-    public class ApiService
+    public class ApiService : IApiService
     {
         #region GET
         public async Task<Respuesta> GetListAsync<T>(string urlBase,
@@ -432,7 +432,7 @@ namespace RN77.BD.Services
         {
             try
             {
-                var request = JsonConvert.SerializeObject(new RecuperarPasswordViewModel { Email = email });
+                var request = JsonConvert.SerializeObject(new EmailRequest { Email = email });
                 var content = new StringContent(request, Encoding.UTF8, "application/json");
                 var client = new HttpClient
                 {

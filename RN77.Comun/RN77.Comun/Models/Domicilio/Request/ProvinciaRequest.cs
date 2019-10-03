@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RN77.Comun.Models.Domicilio
+namespace RN77.Comun.Models.Domicilio.Request
 {
-    public class ProvinciaViewModel
+    public class ProvinciaRequest
     {
         [Required]
         public int PaisId { get; set; }
