@@ -5,8 +5,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RN77.BD.Datos;
-using RN77.BD.Helpers;
-using RN77.BD.Services;
 
 namespace RN77.Actores
 {
