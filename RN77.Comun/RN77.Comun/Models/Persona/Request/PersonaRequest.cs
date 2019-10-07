@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RN77.Comun.Models.Persona
+namespace RN77.Comun.Models.Persona.Request
 {
-    public class PersonaViewModel
+    public class PersonaRequest
     {
         [Required]
         public string Nombre { get; set; }

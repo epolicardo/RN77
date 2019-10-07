@@ -45,6 +45,19 @@ namespace MyVet.Web.Controllers.API
             }
 
             var usuario = await usuarioHelper.GetUserByEmailAsync(peticion.Username);
+            var persona = new Personas
+            {
+                Nombre = peticion.Nombre,
+                Apellido=peticion.Apellido
+            };
+            var respuesta = await apiService.PostAsync<Personas>(
+                "https://shopzulu.azurewebsites.net",
+                "/api",
+                "/Personas",
+                persona,
+                "bearer",
+                "");
+
             if (usuario != null)
             {
                 return BadRequest(new Respuesta
@@ -117,7 +130,7 @@ namespace MyVet.Web.Controllers.API
                     Resultado = null
                 });
             }
-
+            
             var usuario = await usuarioHelper.GetUserByEmailAsync(peticion.Email);
             if (usuario == null)
             {
@@ -130,7 +143,7 @@ namespace MyVet.Web.Controllers.API
             }
 
             var myToken = await usuarioHelper.GeneratePasswordResetTokenAsync(usuario);
-            var link = Url.Action("ResetPassword", "Account", new { token = myToken }, protocol: HttpContext.Request.Scheme);
+            var link = Url.Action("ResetPassword", "Usuario", new { token = myToken }, protocol: HttpContext.Request.Scheme);
             mailHelper.SendMail(peticion.Email, "Limpiar Password", $"<h1>Recuperar Password</h1>" +
                 $"Para recuperar la password click en este link:</br></br>" +
                 $"<a href = \"{link}\">Recuperar Password</a>");
