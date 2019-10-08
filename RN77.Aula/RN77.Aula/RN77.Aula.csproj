@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\RN77.Comun\RN77.BD\RN77.BD.csproj" />
     <ProjectReference Include="..\..\RN77.Comun\RN77.Comun\RN77.Comun.csproj" />
   </ItemGroup>
