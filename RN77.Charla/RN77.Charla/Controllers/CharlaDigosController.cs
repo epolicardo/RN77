@@ -10,37 +10,38 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-//Agustin Giuliani
+// Agustin Giuliani
 //{"esExitoso":false,"mensaje":"Usuario Invalido","resultado":null}
+
 namespace RN77.Charla.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
-    public class TcharlasController : ControllerBase
+    public class CharlaDigosController : ControllerBase
     {
         private readonly RN77Context context;
-        public TcharlasController(RN77Context context)
+        public CharlaDigosController(RN77Context context)
         {
             this.context = context;
         }
-        // GET: api/Tcharlas
+        // GET: api/CharlaDigos
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Tcharlas>>> GetTcharlas()
+        public async Task<ActionResult<IEnumerable<CharlaDigos>>> GetCharlaDigos()
         {
-            return await context.Tcharlas.ToListAsync();
+            return await context.CharlaDigos.ToListAsync();
         }
 
-        // GET api/Tcharlas/5
+        // GET api/CharlaDigos/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Tcharlas>> GetTcharlas(int id)
+        public async Task<ActionResult<CharlaDigos>> GetCharlaDigos(int id)
         {
-            var TcharlaItem = await context.Tcharlas.FindAsync(id);
-            if (TcharlaItem == null)
+            var CharlaDigosItem = await this.context.CharlaDigos.FindAsync(id);
+
+            if (CharlaDigosItem == null)
             {
                 return this.BadRequest(new Respuesta
                 {
                     EsExitoso = false,
-                    Mensaje = "No existe este Tipo de charla",
+                    Mensaje = "No existe la charla",
                     Resultado = null
                 });
             }
@@ -48,13 +49,13 @@ namespace RN77.Charla.Controllers
             {
                 EsExitoso = true,
                 Mensaje = "",
-                Resultado = TcharlaItem
+                Resultado = CharlaDigosItem
             });
         }
 
         // POST api/Tcharlas
         [HttpPost]
-        public async Task<IActionResult> PostTcharlas([FromBody]TcharlasRequest TcharlasRequest)
+        public async Task<IActionResult> PostCharlaDigos([FromBody]CharlaDigosRequest CharlaDigosRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -65,6 +66,7 @@ namespace RN77.Charla.Controllers
                     Resultado = ModelState
                 });
             }
+
             var user = await this.context.Users.FindAsync("1");
             if (user == null)
             {
@@ -75,8 +77,8 @@ namespace RN77.Charla.Controllers
                     Resultado = null
                 });
             }
-            var Tcharlas = await this.context.Charlas.FindAsync(TcharlasRequest.Codigo);
-            if (Tcharlas == null)
+            var CharlaDigos = await this.context.CharlaDigos.FindAsync(CharlaDigosRequest.CharlaId);
+            if (CharlaDigos == null)
             {
                 return BadRequest(new Respuesta
                 {
@@ -85,21 +87,19 @@ namespace RN77.Charla.Controllers
                     Resultado = null
                 });
             }
-            var entity = new Tcharlas
+            var entity = new CharlaDigos
             {
-                Codigo = TcharlasRequest.Codigo,
-                Nombre = TcharlasRequest.Nombre,
-                Descripcion = TcharlasRequest.Descripcion,
+                Digo = CharlaDigosRequest.Digo
             };
             BaseController.CompletaRegistro(entity, 1, "", user, false);
 
 
-            await this.context.Set<Tcharlas>().AddAsync(entity);
+            await this.context.Set<CharlaDigos>().AddAsync(entity);
             try
             {
                 await this.context.SaveChangesAsync();
             }
-            catch (Exception)
+            catch (Exception ee)
             {
                 return BadRequest(new Respuesta
                 {
@@ -112,12 +112,13 @@ namespace RN77.Charla.Controllers
             {
                 EsExitoso = true,
                 Mensaje = "",
-                Resultado = new TcharlasRespuesta
+                Resultado = new CharlaDigosRespuesta
                 {
-                    Nombre = entity.Nombre,
-                    Descripcion = entity.Descripcion,
-                    Codigo = entity.Codigo
-
+                    CharlaId=entity.CharlaId,
+                    CharlaPersonaId=entity.CharlaPersonaId,
+                    CharlaDigoDeDigoId=entity.CharlaDigoDeDigoId,
+                    FechaDigo=entity.FechaDigo,
+                    Digo=entity.Digo
                 }
             });
         }

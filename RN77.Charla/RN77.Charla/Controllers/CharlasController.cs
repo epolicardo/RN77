@@ -4,11 +4,15 @@ using RN77.BD.Controllers;
 using RN77.BD.Datos;
 using RN77.BD.Datos.Entities;
 using RN77.Comun.Models.Charla.Request;
+using RN77.Comun.Models.Charla.Respuesta;
+using RN77.Comun.Models.Varios;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 // Agustin Giuliani
+
+//{"type":"https://tools.ietf.org/html/rfc7231#section-6.5.1","title":"One or more validation errors occurred.","status":400,"traceId":"|8e13d648-42fc767a4ab17ecc.","errors":{"$.Id":["The JSON value could not be converted to System.Int32. Path: $.Id | LineNumber: 1 | BytePositionInLine: 9."]}}
 
 namespace RN77.Charla.Controllers
 {
@@ -31,12 +35,23 @@ namespace RN77.Charla.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Charlas>> GetCharlas(int id)
         {
-            var CharlaItem = await context.Charlas.FindAsync(id);
+            var CharlaItem = await this.context.Charlas.FindAsync(id);
+            
             if (CharlaItem == null)
             {
-                return this.BadRequest("No existe tal Charla");
+                return this.BadRequest(new Respuesta
+                {
+                    EsExitoso=false,
+                    Mensaje="No existe la charla",
+                    Resultado=null
+                });
             }
-            return CharlaItem;
+            return Ok(new Respuesta 
+            {
+                EsExitoso=true,
+                Mensaje="",
+                Resultado=CharlaItem
+            });
         }
 
         // POST api/Tcharlas
@@ -45,23 +60,40 @@ namespace RN77.Charla.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.BadRequest(ModelState);
+                return BadRequest(new Respuesta 
+                {
+                    EsExitoso=false,
+                    Mensaje="Modelo incorecto",
+                    Resultado=ModelState
+                });
             }
+
             var user = await this.context.Users.FindAsync("1");
             if (user == null)
             {
-                return this.BadRequest("Usuario Invalido");
+                return BadRequest(new Respuesta 
+                { 
+                    EsExitoso=false,
+                    Mensaje="Usuario Invalido",
+                    Resultado=null
+                });
+            }
+            var Charlas = await this.context.Charlas.FindAsync(CharlasRequest.Id);
+            if (Charlas==null) 
+            {
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso=false,
+                    Mensaje="Charla no existe.",
+                    Resultado=null
+                });
             }
             var entity = new Charlas
             {
-                //TcharlaId = CharlasRequest.TcharlaId,
-                Id = CharlasRequest.Id,
                 Nombre = CharlasRequest.Nombre,
                 PathLogo= CharlasRequest.Pathlogo,
                 Usuario = user,
                 Descripcion = CharlasRequest.Descripcion,
-                FechaInicio = CharlasRequest.FechaInicio,
-                FechaFin = CharlasRequest.FechaFin,
             };
             BaseController.CompletaRegistro(entity, 1, "", user, false);
 
@@ -73,9 +105,27 @@ namespace RN77.Charla.Controllers
             }
             catch (Exception ee)
             {
-                return this.BadRequest("Registro no grabado, controlar.");
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Registro no grabado, controlar.",
+                    Resultado = null
+                });
             }
-            return Ok(entity);
+            return Ok(new Respuesta 
+            {
+                EsExitoso=true,
+                Mensaje="",
+                Resultado= new CharlasRespuesta 
+                {
+                    TcharlaId=entity.TcharlaId,
+                    Id=entity.Id,
+                    Nombre=entity.Nombre,
+                    Descripcion=entity.Descripcion,
+                    Pathlogo=entity.PathLogo
+
+                }
+            });
         }
         // PUT api/<controller>/5
         [HttpPut("{id}")]
