@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RN77.BD.Controllers;
 using RN77.BD.Datos;
 using RN77.BD.Datos.Entities;
-using RN77.BD.Helpers;
 using RN77.Comun.Models.Domicilio.Request;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace RN77.Actores.Controllers
 {
@@ -122,7 +118,7 @@ namespace RN77.Actores.Controllers
 
             return Ok();
         }
- 
+
     }
 
 }

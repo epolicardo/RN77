@@ -33,13 +33,24 @@ namespace RN77.Actores.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Personas>> GetPersonas(long id)
         {
-            var personasItem = await this.context.Personas.FindAsync(id);
+            var personas = await this.context.Personas.FindAsync(id);
 
-            if (personasItem == null)
+            if (personas == null)
             {
-                return this.BadRequest("No existen Personas.");
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "No existen personas",
+                    Resultado = null
+                });
             }
-            return personasItem;
+
+            return Ok(new Respuesta
+            {
+                EsExitoso = true,
+                Mensaje = "",
+                Resultado = personas
+            });
         }
 
         // POST: api/Personas

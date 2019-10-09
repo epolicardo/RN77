@@ -51,10 +51,10 @@ namespace MyVet.Web.Controllers.API
                 Apellido=peticion.Apellido
             };
             var respuesta = await apiService.PostAsync<Personas>(
-                "https://shopzulu.azurewebsites.net",
+                "https://localhost:44315",
                 "/api",
                 "/Personas",
-                persona,
+                persona, 
                 "bearer",
                 "");
 

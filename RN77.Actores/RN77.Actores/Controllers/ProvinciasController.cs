@@ -4,6 +4,8 @@ using RN77.BD.Controllers;
 using RN77.BD.Datos;
 using RN77.BD.Datos.Entities;
 using RN77.Comun.Models.Domicilio.Request;
+using RN77.Comun.Models.Domicilio.Respuesta;
+using RN77.Comun.Models.Varios;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -32,14 +34,25 @@ namespace RN77.Actores.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Provincias>> GetProvincias(int id)
         {
-            var provinciasItem = await this.context.Provincias.FindAsync(id);
+            var provincias = await this.context.Provincias.FindAsync(id);
 
-            if (provinciasItem == null)
+            if (provincias == null)
             {
-                return this.BadRequest("No existen Provincias.");
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "No existen Provincias.",
+                    Resultado = null
+                });
             }
 
-            return provinciasItem;
+            //return provincias;
+            return Ok(new Respuesta
+            {
+                EsExitoso = true,
+                Mensaje = "",
+                Resultado = provincias
+            });
         }
 
         // POST:/api/Provincias
@@ -53,19 +66,34 @@ namespace RN77.Actores.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return this.BadRequest(ModelState);
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Modelo incorrecto.",
+                    Resultado = ModelState
+                });
             }
 
             var user = await this.context.Users.FindAsync("1");
             if (user == null)
             {
-                return this.BadRequest("Usuario Invalido");
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Usuario Invalido.",
+                    Resultado = null
+                });
             }
 
             var pais = await this.context.Paises.FindAsync(provinciaRequest.PaisId);
             if (pais == null)
             {
-                return this.BadRequest("Pais no existe.");
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Pais no existe.",
+                    Resultado = null
+                });
             }
 
             var entity = new Provincias
@@ -84,10 +112,26 @@ namespace RN77.Actores.Controllers
             }
             catch (Exception ee)
             {
-                return this.BadRequest("Registro no grabado, controlar.");
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Registro no grabado, controlar.",
+                    Resultado = null
+                });
             }
 
-            return Ok(entity);
+            return Ok(new Respuesta
+            {
+                EsExitoso = true,
+                Mensaje = "",
+                Resultado = new ProvinciaRespuesta
+                {
+                    ProvinciaId=entity.Id,
+                    PaisId=entity.PaisId,
+                    NombrePais=entity.Pais.NombrePais,
+                    NombreProvincia=entity.NombreProvincia
+                }
+            });
         }
 
         // PUT: api/Provincias/5
@@ -105,14 +149,30 @@ namespace RN77.Actores.Controllers
             var pais = await this.context.Paises.FindAsync(provinciaRequest.PaisId);
             if (pais == null)
             {
-                return this.BadRequest("Pais no existe.");
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Pais no existe.",
+                    Resultado = null
+                });
             }
             entity.Pais = pais;
             entity.NombreProvincia = provinciaRequest.NombreProvincia;
             this.context.Entry(entity).State = EntityState.Modified;
             await this.context.SaveChangesAsync();
 
-            return Ok(entity);
+            return Ok(new Respuesta
+            {
+                EsExitoso = true,
+                Mensaje = "",
+                Resultado = new ProvinciaRespuesta
+                {
+                    ProvinciaId = entity.Id,
+                    PaisId = entity.PaisId,
+                    NombrePais = entity.Pais.NombrePais,
+                    NombreProvincia = entity.NombreProvincia
+                }
+            });
         }
 
         // DELETE: api/Provincias/5
@@ -123,15 +183,24 @@ namespace RN77.Actores.Controllers
 
             if (provincias == null)
             {
-                return this.BadRequest("Provincia no existe.");
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Provincia no existe.",
+                    Resultado = null
+                });
             }
 
             this.context.Provincias.Remove(provincias);
             await this.context.SaveChangesAsync();
 
-            return Ok();
+
+            return Ok(new Respuesta
+            {
+                EsExitoso = true,
+                Mensaje = "",
+                Resultado = null
+            });
         }
-
     }
-
 }

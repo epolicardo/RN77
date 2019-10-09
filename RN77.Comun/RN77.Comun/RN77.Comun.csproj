@@ -12,7 +12,6 @@
     <Folder Include="Models\Carrera\ViewModel\" />
     <Folder Include="Models\Charla\Respuesta\" />
     <Folder Include="Models\Charla\ViewModel\" />
-    <Folder Include="Models\Domicilio\Respuesta\" />
     <Folder Include="Models\Domicilio\ViewModel\" />
     <Folder Include="Models\Institutcion\Request\" />
     <Folder Include="Models\Institutcion\Respuesta\" />
