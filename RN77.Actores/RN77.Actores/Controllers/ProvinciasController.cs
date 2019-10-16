@@ -62,7 +62,7 @@ namespace RN77.Actores.Controllers
         //     "nombreProvincia": "Córdoba",
         // }
         [HttpPost]
-        public async Task<IActionResult> PostProvincias([FromBody] ProvinciaRequest provinciaRequest)
+        public async Task<ActionResult<Respuesta>> PostProvincias([FromBody] ProvinciaRequest provinciaRequest)
         {
             if (!ModelState.IsValid)
             {
@@ -120,16 +120,23 @@ namespace RN77.Actores.Controllers
                 });
             }
 
+            //return Ok(new Respuesta
+            //{
+            //    EsExitoso = true,
+            //    Mensaje = "",
+            //    Resultado = entity
+            //});
+
             return Ok(new Respuesta
             {
                 EsExitoso = true,
                 Mensaje = "",
                 Resultado = new ProvinciaRespuesta
                 {
-                    ProvinciaId=entity.Id,
-                    PaisId=entity.PaisId,
-                    NombrePais=entity.Pais.NombrePais,
-                    NombreProvincia=entity.NombreProvincia
+                    ProvinciaId = entity.Id,
+                    PaisId = entity.PaisId,
+                    NombrePais = entity.Pais.NombrePais,
+                    NombreProvincia = entity.NombreProvincia
                 }
             });
         }
@@ -141,7 +148,7 @@ namespace RN77.Actores.Controllers
         //     "nombreProvincia": "Córdoba",
         // }
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProvincias(int id, [FromBody] ProvinciaRequest provinciaRequest)
+        public async Task<ActionResult<Respuesta>> PutProvincias(int id, [FromBody] ProvinciaRequest provinciaRequest)
         {
 
             var entity = await this.context.Set<Provincias>().FindAsync(id);
@@ -177,7 +184,7 @@ namespace RN77.Actores.Controllers
 
         // DELETE: api/Provincias/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProvincias(int id)
+        public async Task<ActionResult<Respuesta>> DeleteProvincias(int id)
         {
             var provincias = await this.context.Provincias.FindAsync(id);
 

@@ -32,16 +32,19 @@ namespace RN77.BD.Helpers
             var bodyBuilder = new BodyBuilder();
             bodyBuilder.HtmlBody = body;
             message.Body = bodyBuilder.ToMessageBody();
-
-            using (var client = new SmtpClient())
+            try
             {
-                client.Connect(smtp,
-                               int.Parse(port),
-                               false);
-                client.Authenticate(from,
-                                    password);
-                client.Send(message);
-                client.Disconnect(true);
+                using (var client = new SmtpClient())
+                {
+                    client.Connect(smtp, int.Parse(port), true);
+                    client.Authenticate(from, password);
+                    client.Send(message);
+                    client.Disconnect(true);
+                }
+            }
+            catch (System.Exception err)
+            {
+                throw err;
             }
         }
         #endregion

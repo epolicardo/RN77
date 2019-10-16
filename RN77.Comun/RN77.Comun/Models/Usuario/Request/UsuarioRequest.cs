@@ -5,31 +5,31 @@ namespace RN77.Comun.Models.Usuario.Request
     public class UsuarioRequest
     {
         [Required]
-        [Display(Name = "Nombre")]
+        //[Display(Name = "Nombre")]
         public string Nombre { get; set; }
 
         [Required]
-        [Display(Name = "Apellido")]
+        //[Display(Name = "Apellido")]
         public string Apellido { get; set; }
 
-        [Display(Name = "Nº Documento")]
+        //[Display(Name = "Nº Documento")]
         public string Documento { get; set; }
 
-        [Display(Name = "Tipo Doc.")]
+        //[Display(Name = "Tipo Doc.")]
         public int? TdocumentoCod { get; set; }
 
         [Required]
         [DataType(DataType.EmailAddress)]
-        [Display(Name = "Usuario(email)")]
+        //[Display(Name = "Usuario(email)")]
         public string Username { get; set; }
 
         [Required]
         [MinLength(6)]
-        [Display(Name = "Clave")]
+        //[Display(Name = "Clave")]
         public string Password { get; set; }
 
         [Required]
         [Compare("Password")]
-        public string Confirm { get; set; }
+        public string Confirmar { get; set; }
     }
 }

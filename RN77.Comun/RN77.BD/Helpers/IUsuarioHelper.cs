@@ -10,9 +10,9 @@ namespace RN77.BD.Helpers
     {
         Task<IdentityResult> AddUserAsync(Usuarios usuario, string password);
         Task AddUsuariosToRoleAsync(Usuarios usuario, string roleName);
-        Task<IdentityResult> ChangePasswordAsync(Usuarios usuario, string oldPassword, string newPassword);
+        Task<IdentityResult> CambiarPasswordAsync(Usuarios usuario, string oldPassword, string newPassword);
         Task CheckRoleAsync(string roleName);
-        Task<IdentityResult> ConfirmEmailAsync(Usuarios usuario, string token);
+        Task<IdentityResult> ConfirmaEmailAsync(Usuarios usuario, string token);
         Task DeleteUserAsync(Usuarios usuario);
         Task<string> GenerateEmailConfirmationTokenAsync(Usuarios usuario);
         Task<string> GeneratePasswordResetTokenAsync(Usuarios usuario);
@@ -23,7 +23,7 @@ namespace RN77.BD.Helpers
         Task<SignInResult> LoginAsync(LoginRequest model);
         Task LogoutAsync();
         Task RemoveUserFromRoleAsync(Usuarios usuario, string roleName);
-        Task<IdentityResult> ResetPasswordAsync(Usuarios usuario, string token, string password);
+        Task<IdentityResult> RecuperarPasswordAsync(Usuarios usuario, string token, string password);
         Task<IdentityResult> UpdateUserAsync(Usuarios usuario);
         Task<SignInResult> ValidatePasswordAsync(Usuarios usuario, string password);
     }

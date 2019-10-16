@@ -16,7 +16,6 @@
     <Folder Include="Models\Institutcion\Request\" />
     <Folder Include="Models\Institutcion\Respuesta\" />
     <Folder Include="Models\Institutcion\ViewModel\" />
-    <Folder Include="Models\Persona\Respuesta\" />
     <Folder Include="Models\Persona\ViewModel\" />
     <Folder Include="Models\Usuario\ViewModel\" />
   </ItemGroup>

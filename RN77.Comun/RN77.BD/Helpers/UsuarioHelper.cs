@@ -38,7 +38,7 @@ namespace RN77.BD.Helpers
             await this.usuarioManager.AddToRoleAsync(usuario, roleName);
         }
 
-        public async Task<IdentityResult> ChangePasswordAsync(Usuarios usuario, string oldPassword, string newPassword)
+        public async Task<IdentityResult> CambiarPasswordAsync(Usuarios usuario, string oldPassword, string newPassword)
         {
             return await this.usuarioManager.ChangePasswordAsync(usuario, oldPassword, newPassword);
         }
@@ -90,7 +90,7 @@ namespace RN77.BD.Helpers
                                                                      false);
         }
 
-        public async Task<IdentityResult> ConfirmEmailAsync(Usuarios usuario, string token)
+        public async Task<IdentityResult> ConfirmaEmailAsync(Usuarios usuario, string token)
         {
             return await this.usuarioManager.ConfirmEmailAsync(usuario, token);
         }
@@ -110,7 +110,7 @@ namespace RN77.BD.Helpers
             return await this.usuarioManager.GeneratePasswordResetTokenAsync(usuario);
         }
 
-        public async Task<IdentityResult> ResetPasswordAsync(Usuarios usuario, string token, string password)
+        public async Task<IdentityResult> RecuperarPasswordAsync(Usuarios usuario, string token, string password)
         {
             return await this.usuarioManager.ResetPasswordAsync(usuario, token, password);
         }

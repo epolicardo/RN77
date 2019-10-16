@@ -119,11 +119,11 @@ namespace RN77.BD.Services
 
         #region POST
         public async Task<Respuesta> PostAsync<T>(string urlBase,
-                                                     string servicePrefix,
-                                                     string controller,
-                                                     T model,
-                                                     string tokenType,
-                                                     string accessToken)
+                                                  string servicePrefix,
+                                                  string controller,
+                                                  T model,
+                                                  string tokenType,
+                                                  string accessToken)
         {
             try
             {
@@ -393,7 +393,7 @@ namespace RN77.BD.Services
             }
         }
 
-        public async Task<Respuesta> RecoverPasswordAsync(string urlBase,
+        public async Task<Respuesta> RecuperarPasswordAsync(string urlBase,
                                                           string servicePrefix,
                                                           string controller,
                                                           EmailRequest peticion)
@@ -469,7 +469,7 @@ namespace RN77.BD.Services
             }
         }
 
-        public async Task<Respuesta> ChangePasswordAsync(string urlBase,
+        public async Task<Respuesta> CambiarPasswordAsync(string urlBase,
                                                          string servicePrefix,
                                                          string controller,
                                                          CambiarPasswordRequest cambiarPasswordPeticion,

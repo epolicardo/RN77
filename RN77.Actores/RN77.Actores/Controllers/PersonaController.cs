@@ -13,25 +13,25 @@ namespace RN77.Actores.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PersonasController : ControllerBase
+    public class PersonaController : ControllerBase
     {
         private readonly RN77Context context;
 
-        public PersonasController(RN77Context context)
+        public PersonaController(RN77Context context)
         {
             this.context = context;
         }
 
         // GET: api/Personas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Personas>>> GetPersonas()
+        public async Task<ActionResult<IEnumerable<Personas>>> GetPersona()
         {
             return await this.context.Personas.Include(p => p.Usuario).ToListAsync();
         }
 
         // GET: api/Personas
         [HttpGet("{id}")]
-        public async Task<ActionResult<Personas>> GetPersonas(long id)
+        public async Task<ActionResult<Personas>> GetPersona(long id)
         {
             var personas = await this.context.Personas.FindAsync(id);
 
@@ -55,7 +55,7 @@ namespace RN77.Actores.Controllers
 
         // POST: api/Personas
         [HttpPost]
-        public async Task<IActionResult> PostPersona([FromBody] PersonaRequest peticion)
+        public async Task<ActionResult<Respuesta>> PostPersona([FromBody] PersonaRequest peticion)
         {
             if (!ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace RN77.Actores.Controllers
             {
                 Nombre = peticion.Nombre,
                 Apellido = peticion.Apellido,
-                Usuario = user,
+                Usuario = user
             };
 
             BaseController.CompletaRegistro(entity, 1, "", user, false);
@@ -112,8 +112,8 @@ namespace RN77.Actores.Controllers
 
         // PUT: api/Personas/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPersonas(int id, [FromBody] PersonaRequest peticion)
-        {            
+        public async Task<ActionResult<Respuesta>> PutPersona(int id, [FromBody] PersonaRequest peticion)
+        {
             var entity = await this.context.Set<Personas>().FindAsync(id);
             entity.Nombre = peticion.Nombre;
             this.context.Entry(entity).State = EntityState.Modified;
@@ -129,7 +129,7 @@ namespace RN77.Actores.Controllers
 
         // DELETE: api/personas/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeletePersonas(int id)
+        public async Task<ActionResult<Respuesta>> DeletePersona(int id)
         {
             var personas = await this.context.Personas.FindAsync(id);
 
@@ -144,7 +144,19 @@ namespace RN77.Actores.Controllers
             }
 
             this.context.Personas.Remove(personas);
+            try
+            {
             await this.context.SaveChangesAsync();
+            }
+            catch (Exception eer)
+            {
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "No se pudo borrar la persona.",
+                    Resultado = null
+                });
+            }
 
             return Ok(new Respuesta
             {

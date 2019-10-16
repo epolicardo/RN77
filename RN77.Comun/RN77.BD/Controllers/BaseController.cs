@@ -4,6 +4,10 @@ using System;
 
 namespace RN77.BD.Controllers
 {
+    enum EstadoRegistro
+    {
+
+    }
     public static class BaseController
     {
         public static void CompletaRegistro(IEntityBase entity,
