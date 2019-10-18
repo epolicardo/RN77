@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace RN77.Actores.Controllers
 {
     [Route("api/[Controller]")]
-    public class UsrController : Controller
+    public class UsrController : ControllerBase
     {
         private readonly IUsuarioHelper usuarioHelper;
         private readonly IMailHelper mailHelper;
