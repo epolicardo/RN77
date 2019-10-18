@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Datos\Entities\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
