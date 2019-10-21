@@ -57,6 +57,29 @@ namespace RN77.Aula
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("RN77Connection"));
             });
 
+            // Register the Swagger services
+            services.AddSwaggerDocument();
+            //services.AddSwaggerDocument(config =>
+            //{
+            //    config.PostProcess = document =>
+            //    {
+            //        document.Info.Version = "v1";
+            //        document.Info.Title = "ToDo API";
+            //        document.Info.Description = "A simple ASP.NET Core web API";
+            //        document.Info.TermsOfService = "None";
+            //        document.Info.Contact = new NSwag.OpenApiContact
+            //        {
+            //            Name = "Shayne Boyer",
+            //            Email = string.Empty,
+            //            Url = "https://twitter.com/spboyer"
+            //        };
+            //        document.Info.License = new NSwag.OpenApiLicense
+            //        {
+            //            Name = "Use under LICX",
+            //            Url = "https://example.com/license"
+            //        };
+            //    };
+            //});
             #region INYECCION
             services.AddScoped<IUsuarioHelper, UsuarioHelper>();
             services.AddScoped<IMailHelper, MailHelper>();
@@ -79,6 +102,10 @@ namespace RN77.Aula
             app.UseRouting();
 
             app.UseAuthorization();
+
+            // Register the Swagger generator and the Swagger UI middlewares
+            app.UseOpenApi();
+            app.UseSwaggerUi3();
 
             app.UseEndpoints(endpoints =>
             {
