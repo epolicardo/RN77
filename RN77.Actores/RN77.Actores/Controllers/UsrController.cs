@@ -172,6 +172,51 @@ namespace RN77.Actores.Controllers
             });
         }
 
+        [HttpGet]
+        [Route("Login")]
+        public async Task<ActionResult<Respuesta>> Login([FromBody]LoginRequest peticion)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Datos incorrectos.",
+                    Resultado = null
+                });
+            }
+            
+            var result = await this.usuarioHelper.LoginAsync(peticion);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Usuario o password incorrecto.",
+                    Resultado = null
+                });
+            }
+            var usuario = await this.usuarioHelper.GetUserByEmailAsync(peticion.Email);
+            if (usuario == null)
+            {
+                return BadRequest(new Respuesta
+                {
+                    EsExitoso = false,
+                    Mensaje = "Incosistencia en el usuario, controlar.",
+                    Resultado = null
+                });
+            }
+
+            var token = await this.usuarioHelper.GeneratePasswordResetTokenAsync(usuario);
+            
+            return Ok(new Respuesta
+            {
+                EsExitoso = true,
+                Mensaje = "",
+                Resultado = token
+            });
+        }
+
         [HttpPost]
         [Route("RecuperarPassword")]
         public async Task<ActionResult<Respuesta>> RecuperarPassword([FromBody] EmailRequest peticion)

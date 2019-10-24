@@ -6,7 +6,7 @@ namespace RN77.Comun.Models.Usuario.Request
     {
         [Required]
         [EmailAddress]
-        public string Usuario { get; set; }
+        public string Email { get; set; }
 
         [Required]
         [MinLength(6)]

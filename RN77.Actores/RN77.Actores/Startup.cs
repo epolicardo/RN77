@@ -37,7 +37,9 @@ namespace RN77.Actores
                 cfg.Password.RequireNonAlphanumeric = false;
                 cfg.Password.RequireUppercase = false;
                 cfg.Password.RequiredLength = 6;
-            }).AddDefaultTokenProviders().AddEntityFrameworkStores<RN77Context>();
+            })
+            .AddDefaultTokenProviders()
+            .AddEntityFrameworkStores<RN77Context>();
 
             services.AddAuthentication()
                 .AddCookie()

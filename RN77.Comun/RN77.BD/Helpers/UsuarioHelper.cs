@@ -67,7 +67,7 @@ namespace RN77.BD.Helpers
 
         public async Task<SignInResult> LoginAsync(LoginRequest model)
         {
-            return await this.signInManager.PasswordSignInAsync(model.Usuario,
+            return await this.signInManager.PasswordSignInAsync(model.Email,
                                                                 model.Password,
                                                                 model.RecordarMe,
                                                                 false);
